@@ -1,8 +1,11 @@
 package shareddata;
 
-public class Student extends User{
+public class Student {
 	
-	public Student(int id, String firstName, String lastName){
-		super(id, firstName, lastName);
-	}
+	
+	
+	
+	
+	
+	
 }
