@@ -22,15 +22,15 @@ public class LoginWindow extends JFrame{
 		center.setBorder(new EmptyBorder(20,20,20,20));
 		center.setLayout(new BoxLayout(center, BoxLayout.Y_AXIS));
 		JLabel d3l = new JLabel(new ImageIcon("C:/School/softeng_yr2/ENSF409/TermProject/409Project/Desire3Learn.png"));
-		center.add(d3l, Component.CENTER_ALIGNMENT);
+		center.add(d3l);
 		this.add(center, BorderLayout.CENTER);
 		//center.add(Box.createVeritcalGlue());
 		JPanel pane1 = new JPanel();
 		pane1.setLayout(new FlowLayout());
 		pane1.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		pane1.add(new JLabel("Username: "), Component.LEFT_ALIGNMENT);
+		pane1.add(new JLabel("Username: "));
 		pane1.add(new JTextField(20));
-		center.add(pane1, Component.BOTTOM_ALIGNMENT);
+		center.add(pane1);
 		center.add(Box.createHorizontalGlue());
 		this.add(center, BorderLayout.CENTER);
 		addWindowListener(new java.awt.event.WindowAdapter() {
