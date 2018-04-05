@@ -1,15 +1,35 @@
 package backend;
 
+import java.io.IOException;
+import java.net.ServerSocket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import shareddata.Assignment;
 import shareddata.Student;
 import shareddata.StudentEnrollment;
 
 public class Server {
+	
 	private DatabaseHelper database;
+	private ServerSocket serverSock;
+	private ExecutorService pool;
+	
+	public Server(int portNumber)
+	{
+		try
+		{
+			serverSock = new ServerSocket(portNumber);
+			pool = Executors.newCachedThreadPool();
+			
+		} catch (IOException e)
+		{
+			System.err.println("Error in server construction");
+		}
+	}
 	
 	public Student searchStudentsID(int id){
 		
@@ -96,6 +116,11 @@ public class Server {
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
+	}
+	
+	public static void main(String args[])
+	{
+		
 	}
 }
 

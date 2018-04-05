@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DatabaseHelper {
+	
 	private PreparedStatement statement;
 	private Connection connection;
 	private String sql;

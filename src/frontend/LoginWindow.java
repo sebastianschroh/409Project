@@ -1,10 +1,8 @@
 package frontend;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
@@ -21,14 +19,7 @@ public class LoginWindow {
 	private JPasswordField passwordField;
 	private JLabel lblPasswordError;
 	private JButton btnLogin;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		
-		LoginWindow window = new LoginWindow();
-		window.frame.setVisible(true);
-	}
+	private boolean correctInfo;
 
 	/**
 	 * Create the application.
@@ -80,6 +71,8 @@ public class LoginWindow {
 		lblPasswordError = new JLabel("");
 		lblPasswordError.setBounds(102, 195, 314, 13);
 		frame.getContentPane().add(lblPasswordError);
+		
+		frame.setVisible(true);
 	}
 	
 	private void initializeActionListeners() {
