@@ -10,11 +10,11 @@ public class StudentEnrollment implements Serializable{
 	private int course_id;
 	private boolean enrolling;
 	
-	public StudentEnrollment(int id, int sid, int cid, boolean enr){
+	public StudentEnrollment(int id, int sid, int cid){
 		this.id = id;
 		student_id = sid;
 		course_id = cid;
-		enrolling = enr;
+		enrolling = true;
 	}
 	
 	public void setId(int i){
