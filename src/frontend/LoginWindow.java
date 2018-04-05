@@ -1,14 +1,14 @@
 package frontend;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.Component;
 
@@ -17,29 +17,16 @@ public class LoginWindow {
 	private JFrame frame;
 	private JTextField textField;
 	private JPasswordField passwordField;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LoginWindow window = new LoginWindow();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-
-			}
-		});
-	}
+	private JLabel lblPasswordError;
+	private JButton btnLogin;
+	private boolean correctInfo;
 
 	/**
 	 * Create the application.
 	 */
 	public LoginWindow() {
 		initialize();
+		initializeActionListeners();
 	}
 
 	/**
@@ -65,7 +52,7 @@ public class LoginWindow {
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		JButton btnLogin = new JButton("Login");
+		btnLogin = new JButton("Login");
 		btnLogin.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnLogin.setBounds(291, 136, 125, 40);
 		frame.getContentPane().add(btnLogin);
@@ -80,5 +67,23 @@ public class LoginWindow {
 		lblDesirelearn.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		lblDesirelearn.setBounds(102, 31, 237, 40);
 		frame.getContentPane().add(lblDesirelearn);
+		
+		lblPasswordError = new JLabel("");
+		lblPasswordError.setBounds(102, 195, 314, 13);
+		frame.getContentPane().add(lblPasswordError);
+		
+		frame.setVisible(true);
 	}
-}
+	
+	private void initializeActionListeners() {
+		
+		btnLogin.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg1) {
+				
+				lblPasswordError.setText("Password or username is incorrect!");
+			}
+			});
+		}
+	}
+

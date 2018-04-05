@@ -3,6 +3,8 @@ package shareddata;
 import java.io.Serializable;
 
 public class Assignment implements Serializable{
+
+	private static final long serialVersionUID = 69;
 	private int id;
 	private int course_id;
 	private String title;

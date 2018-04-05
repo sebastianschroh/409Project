@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class StudentEnrollment implements Serializable{
 	
+	private static final long serialVersionUID = 4477;
 	private int id;
 	private int student_id;
 	private int course_id;
