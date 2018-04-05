@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import shareddata.Assignment;
+import shareddata.Course;
 import shareddata.Student;
 import shareddata.StudentEnrollment;
 
@@ -43,7 +44,7 @@ public class Server {
 			database.getConnection().commit();
 			
 			if(rs.next() && rs.getString(6).charAt(0) == 'S'){
-				return new Student(rs.getInt(1), rs.getString(2), rs.getString(3));
+				return new Student(rs.getInt(1), rs.getString(4), rs.getString(5));
 			}
 			else return new Student (0, null, null);
 		} catch (SQLException e) {
@@ -64,12 +65,72 @@ public class Server {
 			database.getConnection().commit();
 			
 			while(rs.next() && rs.getString(6).charAt(0) == 'S'){
-				list.add(new Student(rs.getInt(1), rs.getString(2), rs.getString(3)));
+				list.add(new Student(rs.getInt(1), rs.getString(4), rs.getString(5)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	public ArrayList<Course> browseCourses(int profId){
+		
+		ArrayList<Course> list = new ArrayList<Course>();
+		try {
+			database = new DatabaseHelper();
+			database.prepareStatement("SELECT * FROM termproject.course WHERE prof_id = ?");
+			database.getStatement().setInt(1, profId);
+			
+			ResultSet rs = database.getStatement().executeQuery();
+			database.getConnection().commit();
+			
+			while(rs.next()){
+				list.add(new Course(rs.getInt(1), rs.getInt(2), rs.getString(3)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public void addCourse(Course c){
+		try {
+			database = new DatabaseHelper();
+			database.prepareStatement("INSERT INTO termproject.course (prof_id, name, active) VALUES(?, ?, ?)");
+			database.getStatement().setInt(1, c.getProfID());
+			database.getStatement().setString(2, c.getName());
+			database.getStatement().setBoolean(3, c.getStatus());
+			
+			database.getStatement().executeUpdate();
+			database.getConnection().commit();
+			
+			database.prepareStatement("SELECT id FROM termproject.course WHERE prof_id = ? AND name = ?");
+			database.getStatement().setInt(1, c.getProfID());
+			database.getStatement().setString(2, c.getName());
+			
+			ResultSet rs = database.getStatement().executeQuery();
+			database.getConnection().commit();
+			
+			if(rs.next())
+			c.setID(rs.getInt(1));
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}	
+	}
+	
+	public void setActive(Course c, boolean b){
+		
+		try {
+			database = new DatabaseHelper();
+			database.prepareStatement("UPDATE termproject.course SET active = ? WHERE id = ?");
+			database.getStatement().setBoolean(1,  b);
+			database.getStatement().setInt(2, c.getID());
+			
+			database.getStatement().executeUpdate();
+			database.getConnection().commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void addEnrollment(StudentEnrollment e){
@@ -133,38 +194,39 @@ public class Server {
 			database.getConnection().commit();
 			
 			if(rs.next())
-			a.setID(rs.getInt(1));;
+			a.setID(rs.getInt(1));
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
 	}
 	
-	public void setActive(Assignment a, boolean b){
-/*		
+	public void setActive(Assignment a, boolean b){		
 		try {
 			database = new DatabaseHelper();
-			database.prepareStatement("SELECT * FROM termproject.user WHERE id = ?");
-			database.getStatement().setInt(1,  id);
+			database.prepareStatement("UPDATE termproject.assignment SET active = ? WHERE id = ?");
+			database.getStatement().setBoolean(1,  b);
+			database.getStatement().setInt(2, a.getID());
 			
+			database.getStatement().executeUpdate();
 			database.getConnection().commit();
-			ResultSet rs = database.getStatement().executeQuery();
-			
-			if(rs.next() && rs.getString(6).charAt(0) == 'S'){
-				return new Student(rs.getInt(1), rs.getString(2), rs.getString(3));
-			}
-			else return new Student (0, null, null);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return new Student (0, null, null);*/
 	}
 	
 	public static void main (String [] args){
 		
 		Server server = new Server(2);
-		Assignment as = new Assignment(0, 420, "SMOKE W33D Pt2. The weedening", "NO PATH NIBBA", "UR MOMS BIRTHDAY");
+		Assignment as = new Assignment(0, 420, "SMOKE W33D AGAIN", "NO PATH NIBBA", "UR MOMS BIRTHDAY");
 		server.uploadAssign(as);
 		System.out.println(as.getID());
+		Student stu = server.searchStudentsID(69);
+		System.out.println(stu.getFirstName());
+		server.unenroll(new StudentEnrollment(13, 9, 9));
+		server.setActive(as, false);
+		Course co = new Course(5, 420, "Slicks McDicks");
+		server.addCourse(co);
+		System.out.println(co.getID());
 	}
 }
 

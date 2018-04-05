@@ -80,7 +80,7 @@ public class LoginWindow {
 		btnLogin.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg1) {
-				
+				String password = 
 				lblPasswordError.setText("Password or username is incorrect!");
 			}
 			});
