@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Grade implements Serializable{
 	
+	private static final long serialVersionUID = 432;
 	private int student_id;
 	private int grade;
 	private String student_name;

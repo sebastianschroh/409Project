@@ -3,6 +3,9 @@ package shareddata;
 import java.io.Serializable;
 
 public class Submission implements Serializable{
+	
+	
+	private static final long serialVersionUID = 8978;
 	private int id;
 	private int assign_id;
 	private int student_id;
