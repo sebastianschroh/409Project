@@ -4,11 +4,18 @@ package frontend;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import shareddata.LoginInfo;
+
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.awt.Color;
 import java.awt.Component;
 
@@ -19,12 +26,17 @@ public class LoginWindow {
 	private JPasswordField passwordField;
 	private JLabel lblPasswordError;
 	private JButton btnLogin;
-	private boolean correctInfo;
-
+	private ObjectInputStream in;
+	private ObjectOutputStream out;
+	private boolean correctInfo = false;
+	private LoginInfo login = null;
 	/**
 	 * Create the application.
 	 */
-	public LoginWindow() {
+	public LoginWindow(ObjectInputStream in, ObjectOutputStream out) {
+		this.in = in;
+		this.out = out;
+		correctInfo = false;
 		initialize();
 		initializeActionListeners();
 	}
@@ -33,6 +45,7 @@ public class LoginWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 497, 300);
@@ -80,10 +93,60 @@ public class LoginWindow {
 		btnLogin.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg1) {
-				String password = 
-				lblPasswordError.setText("Password or username is incorrect!");
+				
+				try {
+					lblPasswordError.setText("");
+					login = new LoginInfo(Integer.parseInt(textField.getText()),new String(passwordField.getPassword()));
+					out.writeObject(login);
+					out.flush();
+					} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				try {
+					LoginInfo received = (LoginInfo) in.readObject();
+					if(received.isAuthentic() == true)
+					{
+						correctInfo = true;
+						frame.dispose();
+						//frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+					}
+					else
+					{
+						loginIncorrect();
+					}
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			});
-		}
 	}
+	
+	public void loginIncorrect()
+	{
+		lblPasswordError.setText("Username or password is incorrect");
+	}
+	
+	public LoginInfo login()
+	{
+		return login;
+	}
+	
+	public boolean correctInfo()
+	{
+		return correctInfo;
+	}
+	
+	public void setLogin(LoginInfo b)
+	{
+		login = b;
+	}
+}
 

@@ -1,7 +1,10 @@
 package backend;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,6 +13,9 @@ import java.util.concurrent.Executors;
 
 import shareddata.Assignment;
 import shareddata.Course;
+
+import shareddata.LoginInfo;
+
 import shareddata.Student;
 import shareddata.StudentEnrollment;
 
@@ -19,6 +25,10 @@ public class Server {
 
 	private ServerSocket serverSock;
 	private ExecutorService pool;
+	private ObjectInputStream in;
+	private ObjectOutputStream out;
+	
+	
 	
 	public Server(int portNumber)
 	{
@@ -26,10 +36,38 @@ public class Server {
 		{
 			serverSock = new ServerSocket(portNumber);
 			pool = Executors.newCachedThreadPool();
+			Socket client = serverSock.accept();
+			in = new ObjectInputStream(client.getInputStream());
+			out = new ObjectOutputStream(client.getOutputStream());
 			
 		} catch (IOException e)
 		{
 			System.err.println("Error in server construction");
+		}
+	}
+	
+	public void communicate()
+	{
+		while(true)
+		{
+			try {
+				
+				LoginInfo info = (LoginInfo) in.readObject();
+				if((info.getUsername() == 78) && (info.getPassword().equals("o")))
+				{
+					info.authenticate();
+				}
+				out.writeObject(info);
+				out.flush();
+					
+			} catch (ClassNotFoundException e) {
+				
+				e.printStackTrace();
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+				break;
+			}
 		}
 	}
 
@@ -216,17 +254,11 @@ public class Server {
 	
 	public static void main (String [] args){
 		
-		Server server = new Server(2);
-		Assignment as = new Assignment(0, 420, "SMOKE W33D AGAIN", "NO PATH NIBBA", "UR MOMS BIRTHDAY");
-		server.uploadAssign(as);
-		System.out.println(as.getID());
-		Student stu = server.searchStudentsID(69);
-		System.out.println(stu.getFirstName());
-		server.unenroll(new StudentEnrollment(13, 9, 9));
-		server.setActive(as, false);
-		Course co = new Course(5, 420, "Slicks McDicks");
-		server.addCourse(co);
-		System.out.println(co.getID());
+		Server server = new Server(6969);
+		server.communicate();
+		//Assignment as = new Assignment(0, 420, "SMOKE W33D Pt2. The weedening", "NO PATH NIBBA", "UR MOMS BIRTHDAY");
+		//server.uploadAssign(as);
+		//System.out.println(as.getID());
 	}
 }
 

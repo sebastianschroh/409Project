@@ -12,38 +12,35 @@ import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.awt.CardLayout;
 import javax.swing.SwingConstants;
+
+import frontend.Client;
+import frontend.LoginWindow;
+import shareddata.LoginInfo;
+
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 import java.awt.Component;
 import javax.swing.JTabbedPane;
+import javax.swing.JButton;
 
 public class PageNavigatorTest {
 
 	private JFrame frame;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PageNavigatorTest window = new PageNavigatorTest();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	private JButton btnJustDoesNothing;
+	private ObjectOutputStream out;
+	private ObjectInputStream in;
 	/**
 	 * Create the application.
 	 */
-	public PageNavigatorTest() {
+	public PageNavigatorTest(ObjectInputStream in, ObjectOutputStream out) {
 		initialize();
+		addActionListeners();
 	}
 
 	/**
@@ -89,6 +86,9 @@ public class PageNavigatorTest {
 		gbc_panel.gridy = 1;
 		frame.getContentPane().add(panel, gbc_panel);
 		
+		btnJustDoesNothing = new JButton("Just does nothing");
+		panel.add(btnJustDoesNothing);
+		
 		JPanel panel_2 = new JPanel();
 		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
 		gbc_panel_2.gridwidth = 2;
@@ -97,6 +97,25 @@ public class PageNavigatorTest {
 		gbc_panel_2.gridx = 0;
 		gbc_panel_2.gridy = 2;
 		frame.getContentPane().add(panel_2, gbc_panel_2);
+		frame.setVisible(true);
+		
 	}
+	
+	public void setVisible(boolean b)
+	{
+		frame.setVisible(b);
+	}
+	public void addActionListeners()
+	{
+		btnJustDoesNothing.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg1)
+			{
+				System.out.println("Does nothing");
+			}
+			
+		});
+	}
+
 
 }
