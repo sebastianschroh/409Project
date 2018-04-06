@@ -241,6 +241,25 @@ public class Worker implements Runnable {
 		}
 	}
 	
+	public void checkPassword(LoginInfo l){
+		
+		try {
+			database = new DatabaseHelper();
+			database.prepareStatement("SELECT * FROM termproject.user WHERE id = ?");
+			database.getStatement().setInt(1,  l.getUsername());
+			
+			ResultSet rs = database.getStatement().executeQuery();
+			database.getConnection().commit();
+			
+			if(rs.next() && (rs.getString(2).equals(l.getPassword())))
+				l.authenticate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	public void closeConnection()
 	{
 		try {
