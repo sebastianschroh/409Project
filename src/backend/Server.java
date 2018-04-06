@@ -15,9 +15,10 @@ import shareddata.Assignment;
 import shareddata.Course;
 
 import shareddata.LoginInfo;
-
+import shareddata.Professor;
 import shareddata.Student;
 import shareddata.StudentEnrollment;
+import shareddata.User;
 
 public class Server {
 	
@@ -55,7 +56,7 @@ public class Server {
 		}
 	}
 
-	public Student searchStudentsID(int id){
+	public User searchUserID(int id){
 		
 		try {
 			database = new DatabaseHelper();
@@ -65,23 +66,24 @@ public class Server {
 			ResultSet rs = database.getStatement().executeQuery();
 			database.getConnection().commit();
 			
-			if(rs.next() && rs.getString(6).charAt(0) == 'S'){
+			if(rs.next() && rs.getString(6).charAt(0) == 'S')
 				return new Student(rs.getInt(1), rs.getString(4), rs.getString(5));
-			}
-			else return new Student (0, null, null);
+			else if (rs.next() && rs.getString(6).charAt(0) == 'P')
+				return new Professor(rs.getInt(1), rs.getString(4), rs.getString(5));
+			
+			else return new User (0, null, null);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return new Student (0, null, null);
+		return new User (0, null, null);
 	}
-	
-	public ArrayList<Student> searchStudentsName(String name){
+	public ArrayList<Student> searchStudentsName(Student s){
 		
 		ArrayList<Student> list = new ArrayList<Student>();
 		try {
 			database = new DatabaseHelper();
 			database.prepareStatement("SELECT * FROM termproject.user WHERE lastname = ?");
-			database.getStatement().setString(1, name);
+			database.getStatement().setString(1, s.getLastName());
 			
 			ResultSet rs = database.getStatement().executeQuery();
 			database.getConnection().commit();
