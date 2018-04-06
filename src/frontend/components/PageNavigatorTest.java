@@ -41,11 +41,13 @@ public class PageNavigatorTest {
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
 	private String name;
-	JButton btnYeet;
+	private JButton btnYeet;
 	/**
 	 * Create the application.
 	 */
 	public PageNavigatorTest(ObjectInputStream in, ObjectOutputStream out, Professor p) {
+		this.in = in;
+		this.out = out;
 		professor = p;
 		initialize();
 	}
@@ -105,9 +107,7 @@ public class PageNavigatorTest {
 		gbc_panel_2.gridy = 1;
 		frame.getContentPane().add(panel_2, gbc_panel_2);
 		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.X_AXIS));
-		
-		
-		sendObject(professor);
+		sendObject((Object)professor);
 		sendObject("getcourses");
 		ArrayList<Course> course = null;
 		try {
@@ -117,7 +117,12 @@ public class PageNavigatorTest {
 		} catch (IOException e) {
 					e.printStackTrace();
 		}
-		System.out.println(course.get(0).getName());
+		JPanel p = new JPanel(new FlowLayout());
+		JButton courses = new JButton("set active");
+		p.add(courses);
+		p.add(new JLabel(course.get(0).getName()));
+		panel_2.add(p);
+		
 		frame.setVisible(true);
 		
 	}
