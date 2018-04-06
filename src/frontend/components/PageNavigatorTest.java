@@ -32,6 +32,7 @@ import javax.swing.BoxLayout;
 import java.awt.Component;
 import javax.swing.JTabbedPane;
 import javax.swing.JButton;
+import java.awt.ComponentOrientation;
 
 public class PageNavigatorTest {
 
@@ -41,7 +42,9 @@ public class PageNavigatorTest {
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
 	private String name;
-	private JButton btnYeet;
+	private JPanel panel;
+	private JButton btnAddCourse;
+	private JButton btnSearchStudent;
 	/**
 	 * Create the application.
 	 */
@@ -63,15 +66,15 @@ public class PageNavigatorTest {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{19, 737, 0};
-		gridBagLayout.rowHeights = new int[]{51, 71, 472, 0};
+		gridBagLayout.rowHeights = new int[]{51, -75, 472, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
 		frame.getContentPane().setLayout(gridBagLayout);
 		
 		JPanel panel_1 = new JPanel();
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.gridwidth = 3;
-		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
+		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
 		gbc_panel_1.gridx = 0;
 		gbc_panel_1.gridy = 0;
@@ -88,27 +91,34 @@ public class PageNavigatorTest {
 		lblWelcome.setVerticalAlignment(SwingConstants.BOTTOM);
 		panel_1.add(lblWelcome, BorderLayout.EAST);
 		
-		btnYeet = new JButton("Yeet");
-		panel_1.add(btnYeet, BorderLayout.CENTER);
-		btnYeet.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent arg1)
-			{
-				System.out.println("yeet");
-			}
+		panel = new JPanel();
+		panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.gridwidth = 3;
+		gbc_panel.insets = new Insets(0, 0, 5, 5);
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 1;
+		frame.getContentPane().add(panel, gbc_panel);
+		
+		btnSearchStudent = new JButton("Search Student");
+		panel.add(btnSearchStudent);
+		
+		btnAddCourse = new JButton("Add course");
+		panel.add(btnAddCourse);
+		btnAddCourse.addActionListener(new ActionListener() {
 			
 		});
 				
 		JPanel panel_2 = new JPanel();
 		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
-		gbc_panel_2.gridheight = 2;
 		gbc_panel_2.gridwidth = 2;
 		gbc_panel_2.insets = new Insets(0, 0, 0, 5);
 		gbc_panel_2.fill = GridBagConstraints.BOTH;
 		gbc_panel_2.gridx = 0;
-		gbc_panel_2.gridy = 1;
+		gbc_panel_2.gridy = 2;
 		frame.getContentPane().add(panel_2, gbc_panel_2);
-		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.X_AXIS));
+		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.Y_AXIS));
 		
 		System.out.println(professor.getFirstName());
 		sendObject(professor);
@@ -122,12 +132,34 @@ public class PageNavigatorTest {
 		} catch (IOException e) {
 					e.printStackTrace();
 		}
-		JPanel p = new JPanel(new FlowLayout());
-		JButton courses = new JButton("set active");
-		p.add(courses);
-		p.add(new JLabel(course.get(0).getName()));
-		panel_2.add(p);
-		
+		for(int i = 0; i < course.size(); i ++) {
+		final CourseItem courseItem = new CourseItem(course.get(i));
+		courseItem.getActive().addActionListener(new ActionListener(){
+			
+			public void actionPerformed(ActionEvent arg1) {
+				JButton button = (JButton)arg1.getSource();
+				sendObject(courseItem.getCourse());
+				sendObject("setCourseActivity");
+				Course c = null;
+				try {
+					c = (Course) in.readObject();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				if(c.getStatus() == true)
+				{
+					button.setForeground(Color.black);
+				}
+				else
+				{
+					button.setForeground(Color.red);
+				}
+			}
+		});
+		panel_2.add(courseItem);
+		}
 		frame.setVisible(true);
 		
 	}

@@ -41,6 +41,14 @@ public class Worker implements Runnable {
 			try {
 				Object input = in.readObject();
 				
+				if(input instanceof Course) {
+					Course course = (Course)input;
+					String s = (String)in.readObject();
+					if(s.contains("setCourseActivity"))
+					{
+						sendObject(setActive(course));
+					}
+				}
 				if(input instanceof LoginInfo)
 				{
 				LoginInfo info = (LoginInfo) input;
@@ -195,12 +203,26 @@ public class Worker implements Runnable {
 		}	
 	}
 	
-	public void setActive(Course c, boolean b){
-		
+	public Course setActive(Course c){
+		Course course = new Course(0,0,null);
 		try {
+			boolean b = false;
 			database = new DatabaseHelper();
-			database.prepareStatement("UPDATE termproject.course SET active = ? WHERE id = ?");
-			database.getStatement().setBoolean(1,  b);
+			database.prepareStatement("SELECT active FROM termproject.course WHERE id = ?");
+			database.getStatement().setInt(1, c.getID());
+			
+			ResultSet rs = database.getStatement().executeQuery();
+			database.getConnection().commit();
+			
+			if(rs.next())
+				b = rs.getBoolean(1);
+			course = new Course(c.getID(), c.getProfID(), c.getName());
+			course.setActive(!b);
+			database.prepareStatement("UPDATE termproject.course SET active = ? WHERE id = ?" );
+			if(b) 
+				database.getStatement().setBoolean(1, false);
+			else
+				database.getStatement().setBoolean(1, true);
 			database.getStatement().setInt(2, c.getID());
 			
 			database.getStatement().executeUpdate();
@@ -208,6 +230,7 @@ public class Worker implements Runnable {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return course;
 	}
 	
 	public void addEnrollment(StudentEnrollment e){
