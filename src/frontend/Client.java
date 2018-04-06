@@ -31,6 +31,17 @@ public class Client {
 	
 	public void communicate()
 	{
+		login();
+	}
+	
+	public static void main(String args[])
+	{
+		Client client = new Client("localhost", 6969);
+		client.communicate();
+	}
+	
+	public void login()
+	{
 		LoginWindow login = new LoginWindow(in, out);
 		while(!login.correctInfo())
 		{
@@ -44,13 +55,13 @@ public class Client {
 			if(user instanceof Student)
 			{
 				Student student = (Student) user;
-				PageNavigatorTest p = new PageNavigatorTest(in, out);
-				p.setName(student.getFirstName() + " " + student.getLastName());
+				//PageNavigatorTest p = new PageNavigatorTest(in, out, student);
+				//p.setName(student.getFirstName() + " " + student.getLastName());
 			}
 			else if(user instanceof Professor)
 			{
 				Professor professor = (Professor) user;
-				PageNavigatorTest p = new PageNavigatorTest(in,out);
+				PageNavigatorTest p = new PageNavigatorTest(in,out, professor);
 				p.setName(professor.getFirstName() + " " + professor.getLastName());
 			}
 		} catch (ClassNotFoundException e) {
@@ -59,13 +70,6 @@ public class Client {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void main(String args[])
-	{
-		Client client = new Client("localhost", 6969);
-		client.communicate();
-	}
-	
 	public void sendObject(Object s)
 	{
 		try {

@@ -56,11 +56,20 @@ public class Worker implements Runnable {
 						sendObject(searchUserID(Integer.parseInt(instruction[1])));
 					}
 				}
+				if(input instanceof Professor)
+				{
+					Professor prof = (Professor) input;
+					input = in.readObject();
+					String s = (String) input;
+					if(s.contains("getcourses"))
+					{
+						sendObject(browseCourses(prof.getId()));
+					}
+				}
 			} catch (ClassNotFoundException e) {
 				
 				e.printStackTrace();
 			} catch (IOException e) {
-				
 				e.printStackTrace();
 				closeConnection();
 				break;
@@ -92,11 +101,8 @@ public class Worker implements Runnable {
 			
 			if(rs.next() && rs.getString(6).charAt(0) == 'S')
 				 user = new Student(rs.getInt(1), rs.getString(4), rs.getString(5));
-			else if (rs.next() && rs.getString(6).charAt(0) == 'p')
-				user = new Professor(rs.getInt(1), rs.getString(4), rs.getString(5));
-			System.out.println(user.getFirstName());
-			
-				
+			else if (rs.getString(6).charAt(0) == 'p')
+				user = new Professor(rs.getInt(1), rs.getString(4), rs.getString(5));	
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

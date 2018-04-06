@@ -14,14 +14,18 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.awt.CardLayout;
 import javax.swing.SwingConstants;
 
 import frontend.Client;
 import frontend.LoginWindow;
+import shareddata.Course;
 import shareddata.LoginInfo;
+import shareddata.Professor;
 
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
@@ -32,17 +36,18 @@ import javax.swing.JButton;
 public class PageNavigatorTest {
 
 	private JFrame frame;
-	private JButton btnJustDoesNothing;
 	private JLabel lblWelcome;
+	private Professor professor;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
 	private String name;
+	JButton btnYeet;
 	/**
 	 * Create the application.
 	 */
-	public PageNavigatorTest(ObjectInputStream in, ObjectOutputStream out) {
+	public PageNavigatorTest(ObjectInputStream in, ObjectOutputStream out, Professor p) {
+		professor = p;
 		initialize();
-		addActionListeners();
 	}
 
 	/**
@@ -79,28 +84,53 @@ public class PageNavigatorTest {
 		lblWelcome.setVerticalAlignment(SwingConstants.BOTTOM);
 		panel_1.add(lblWelcome, BorderLayout.EAST);
 		
-		JPanel panel = new JPanel();
-		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.gridwidth = 3;
-		gbc_panel.insets = new Insets(0, 0, 5, 0);
-		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 1;
-		frame.getContentPane().add(panel, gbc_panel);
-		
-		btnJustDoesNothing = new JButton("Just does nothing");
-		panel.add(btnJustDoesNothing);
-		
+		btnYeet = new JButton("Yeet");
+		panel_1.add(btnYeet, BorderLayout.CENTER);
+		btnYeet.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg1)
+			{
+				System.out.println("yeet");
+			}
+			
+		});
+				
 		JPanel panel_2 = new JPanel();
 		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
+		gbc_panel_2.gridheight = 2;
 		gbc_panel_2.gridwidth = 2;
 		gbc_panel_2.insets = new Insets(0, 0, 0, 5);
 		gbc_panel_2.fill = GridBagConstraints.BOTH;
 		gbc_panel_2.gridx = 0;
-		gbc_panel_2.gridy = 2;
+		gbc_panel_2.gridy = 1;
 		frame.getContentPane().add(panel_2, gbc_panel_2);
+		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.X_AXIS));
+		
+		
+		sendObject(professor);
+		sendObject("getcourses");
+		ArrayList<Course> course = null;
+		try {
+			course = (ArrayList<Course>) in.readObject();
+		} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+		} catch (IOException e) {
+					e.printStackTrace();
+		}
+		System.out.println(course.get(0).getName());
 		frame.setVisible(true);
 		
+	}
+	
+	public void sendObject(Object s)
+	{
+		try {
+		out.writeObject(s);
+		out.flush();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public void setName(String s)
@@ -112,17 +142,8 @@ public class PageNavigatorTest {
 	{
 		frame.setVisible(b);
 	}
-	public void addActionListeners()
-	{
-		btnJustDoesNothing.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent arg1)
-			{
-				System.out.println("Does nothing");
-			}
-			
-		});
-	}
+
+	
 
 
 }
