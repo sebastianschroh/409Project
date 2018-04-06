@@ -44,9 +44,14 @@ public class Worker implements Runnable {
 				if(input instanceof Course) {
 					Course course = (Course)input;
 					String s = (String)in.readObject();
+					System.out.println(s);
 					if(s.contains("setCourseActivity"))
 					{
 						sendObject(setActive(course));
+					}
+					else if(s.contains("createcourse"))
+					{
+						sendObject(addCourse(course));
 					}
 				}
 				if(input instanceof LoginInfo)
@@ -178,7 +183,8 @@ public class Worker implements Runnable {
 		return list;
 	}
 	
-	public void addCourse(Course c){
+	public Course addCourse(Course c){
+		Course r = null;
 		try {
 			database = new DatabaseHelper();
 			database.prepareStatement("INSERT INTO termproject.course (prof_id, name, active) VALUES(?, ?, ?)");
@@ -198,9 +204,12 @@ public class Worker implements Runnable {
 			
 			if(rs.next())
 			c.setID(rs.getInt(1));
+			
+			r = c;
 		} catch (SQLException ex) {
 			ex.printStackTrace();
-		}	
+		}
+		return r;
 	}
 	
 	public Course setActive(Course c){
