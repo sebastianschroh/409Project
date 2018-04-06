@@ -41,13 +41,18 @@ public class Worker implements Runnable {
 				if(input instanceof LoginInfo)
 				{
 				LoginInfo info = (LoginInfo) input;
-				if((info.getUsername() == 78) && (info.getPassword().equals("o")))
-				{
-					info.authenticate();
+				checkPassword(info);
+				sendObject(info);
 				}
-				out.writeObject(info);
-				out.flush();
-				}	
+				if(input instanceof String)
+				{
+					String s = (String) input;
+					if(s.contains("getuser"))
+					{
+						String [] instruction = s.split(" ");
+						
+					}
+				}
 			} catch (ClassNotFoundException e) {
 				
 				e.printStackTrace();
@@ -60,12 +65,23 @@ public class Worker implements Runnable {
 		}
 	}
 	
-	public Student searchStudentsID(int id){
+	public void sendObject(Object s)
+	{
+		try {
+		out.writeObject(s);
+		out.flush();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public Student searchStudentsID(Student s){
 		
 		try {
 			database = new DatabaseHelper();
 			database.prepareStatement("SELECT * FROM termproject.user WHERE id = ?");
-			database.getStatement().setInt(1,  id);
+			database.getStatement().setInt(1,  s.getId());
 			
 			ResultSet rs = database.getStatement().executeQuery();
 			database.getConnection().commit();
