@@ -36,6 +36,7 @@ public class Client {
 		System.out.println("hello");
 
 		PageNavigatorTest p = new PageNavigatorTest(in, out);
+		p.setName(String.valueOf(login.login().getPassword()));
 		System.out.println("hello");
 	}
 	

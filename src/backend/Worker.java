@@ -3,6 +3,7 @@ package backend;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,8 +12,10 @@ import java.util.ArrayList;
 import shareddata.Assignment;
 import shareddata.Course;
 import shareddata.LoginInfo;
+import shareddata.Professor;
 import shareddata.Student;
 import shareddata.StudentEnrollment;
+import shareddata.User;
 
 public class Worker implements Runnable {
 	
@@ -50,7 +53,8 @@ public class Worker implements Runnable {
 					if(s.contains("getuser"))
 					{
 						String [] instruction = s.split(" ");
-						
+						User user = searchUserID(Integer.parseInt(instruction[1]));
+						sendObject(user);
 					}
 				}
 			} catch (ClassNotFoundException e) {
@@ -74,6 +78,29 @@ public class Worker implements Runnable {
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	public User searchUserID(int id){
+		
+		try {
+			database = new DatabaseHelper();
+			database.prepareStatement("SELECT * FROM termproject.user WHERE id = ?");
+			database.getStatement().setInt(1,  id);
+			
+			ResultSet rs = database.getStatement().executeQuery();
+			database.getConnection().commit();
+			rs.next();
+			System.out.println(rs.getString(6));
+			if(rs.next() && rs.getString(6).charAt(0) == 'S')
+				return new Student(rs.getInt(1), rs.getString(4), rs.getString(5));
+			else if (rs.next() && rs.getString(6).charAt(0) == 'P')
+				return new Professor(rs.getInt(1), rs.getString(4), rs.getString(5));
+			
+			else return new User (0, null, null);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return new User (0, null, null);
 	}
 	
 	public Student searchStudentsID(Student s){

@@ -30,7 +30,7 @@ public class LoginWindow {
 	private ObjectOutputStream out;
 
 	private volatile boolean correctInfo = false;
-	private LoginInfo login = null;
+	private LoginInfo login;
 	/**
 	 * Create the application.
 	 */
