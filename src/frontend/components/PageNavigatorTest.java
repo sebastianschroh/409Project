@@ -43,8 +43,11 @@ public class PageNavigatorTest {
 	private ObjectInputStream in;
 	private String name;
 	private JPanel panel;
+	private JPanel panel_2;
 	private JButton btnAddCourse;
 	private JButton btnSearchStudent;
+	private ArrayList<Course> course = null;
+	private JButton btnRefresh;
 	/**
 	 * Create the application.
 	 */
@@ -108,9 +111,81 @@ public class PageNavigatorTest {
 		panel.add(btnAddCourse);
 		btnAddCourse.addActionListener(new ActionListener() {
 			
+			public void actionPerformed(ActionEvent arg1)
+			{
+				final CourseCreator coursecreator = new CourseCreator();
+				coursecreator.getButton().addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg1)
+					{
+						String temp = coursecreator.getTextfieldText();
+						Course co = new Course(0, professor.getId(), temp);
+						sendObject(co);
+						sendObject("createcourse");
+						try {
+							Course t = (Course) in.readObject();
+							course.add(t);
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						coursecreator.getFrame().dispose();
+					}
+					
+				});
+			}
 		});
+		
+		btnRefresh = new JButton("Refresh");
+		panel.add(btnRefresh);
+		
+		btnRefresh.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {
 				
-		JPanel panel_2 = new JPanel();
+				panel_2.removeAll();
+				panel_2.repaint();
+				panel_2.revalidate();
+				for(int i = 0; i < course.size(); i++)
+				{
+					final CourseItem temp = new CourseItem(course.get(i));
+					temp.getActive().addActionListener(new ActionListener(){
+						
+						public void actionPerformed(ActionEvent arg1) {
+							JButton button = (JButton)arg1.getSource();
+							sendObject(temp.getCourse());
+							sendObject("setCourseActivity");
+							Course c = null;
+							try {
+								c = (Course) in.readObject();
+							} catch (ClassNotFoundException e) {
+								e.printStackTrace();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							if(c.getStatus() == true)
+							{
+								button.setForeground(Color.black);
+							}
+							else
+							{
+								button.setForeground(Color.red);
+							}
+						}
+					});
+					panel_2.add(temp);
+				}
+				panel_2.repaint();
+				panel_2.revalidate();
+			}
+
+			});
+
+				
+		panel_2 = new JPanel();
 		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
 		gbc_panel_2.gridwidth = 2;
 		gbc_panel_2.insets = new Insets(0, 0, 0, 5);
@@ -124,7 +199,7 @@ public class PageNavigatorTest {
 		sendObject(professor);
 
 		sendObject("getcourses");
-		ArrayList<Course> course = null;
+		course = null;
 		try {
 			course = (ArrayList<Course>) in.readObject();
 		} catch (ClassNotFoundException e) {
