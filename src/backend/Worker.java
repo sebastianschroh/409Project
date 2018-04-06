@@ -3,58 +3,63 @@ package backend;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import shareddata.Assignment;
 import shareddata.Course;
-
 import shareddata.LoginInfo;
-
 import shareddata.Student;
 import shareddata.StudentEnrollment;
 
-public class Server {
+public class Worker implements Runnable {
 	
+	private Socket accessSock;
+	private ObjectInputStream in;
+	private ObjectOutputStream out;
 	private DatabaseHelper database;
-
-	private ServerSocket serverSock;
-	private ExecutorService pool;
 	
-	
-	
-	public Server(int portNumber)
+	public Worker(Socket socket)
 	{
-		try
-		{
-			serverSock = new ServerSocket(portNumber);
-			pool = Executors.newCachedThreadPool();
-			
-		} catch (IOException e)
-		{
-			System.err.println("Error in server construction");
+		accessSock = socket;
+		try {
+			in = new ObjectInputStream(socket.getInputStream());
+			out = new ObjectOutputStream(socket.getOutputStream());
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
-	
-	public void communicate()
+	public void run()
 	{
 		while(true)
 		{
-			
-				try {
-					Worker w = new Worker(serverSock.accept());
-					pool.execute(w);
-				} catch (IOException e) {
-					pool.shutdown();
+			try {
+				Object input = in.readObject();
+				
+				if(input instanceof LoginInfo)
+				{
+				LoginInfo info = (LoginInfo) input;
+				if((info.getUsername() == 78) && (info.getPassword().equals("o")))
+				{
+					info.authenticate();
 				}
+				out.writeObject(info);
+				out.flush();
+				}	
+			} catch (ClassNotFoundException e) {
+				
+				e.printStackTrace();
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+				closeConnection();
+				break;
+			}
 		}
 	}
-
+	
 	public Student searchStudentsID(int id){
 		
 		try {
@@ -236,13 +241,14 @@ public class Server {
 		}
 	}
 	
-	public static void main (String [] args){
-		
-		Server server = new Server(6969);
-		server.communicate();
-		//Assignment as = new Assignment(0, 420, "SMOKE W33D Pt2. The weedening", "NO PATH NIBBA", "UR MOMS BIRTHDAY");
-		//server.uploadAssign(as);
-		//System.out.println(as.getID());
+	public void closeConnection()
+	{
+		try {
+			out.close();
+			in.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
-

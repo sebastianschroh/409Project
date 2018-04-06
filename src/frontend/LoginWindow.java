@@ -28,7 +28,7 @@ public class LoginWindow {
 	private JButton btnLogin;
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
-	private boolean correctInfo = false;
+	private volatile boolean correctInfo = false;
 	private LoginInfo login = null;
 	/**
 	 * Create the application.
@@ -94,13 +94,15 @@ public class LoginWindow {
 
 			public void actionPerformed(ActionEvent arg1) {
 				
+				lblPasswordError.setText("");
+				if(textField.getText().matches("[0-9]+") && textField.getText().length() > 0)
+				{
 				try {
-					lblPasswordError.setText("");
 					login = new LoginInfo(Integer.parseInt(textField.getText()),new String(passwordField.getPassword()));
 					out.writeObject(login);
 					out.flush();
 					} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -125,8 +127,12 @@ public class LoginWindow {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
-			});
+				}
+				else
+				{
+					lblPasswordError.setText("Username has to be digits");
+				}
+			}});
 	}
 	
 	public void loginIncorrect()
