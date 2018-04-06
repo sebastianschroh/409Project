@@ -53,8 +53,7 @@ public class Worker implements Runnable {
 					if(s.contains("getuser"))
 					{
 						String [] instruction = s.split(" ");
-						User user = searchUserID(Integer.parseInt(instruction[1]));
-						sendObject(user);
+						sendObject(searchUserID(Integer.parseInt(instruction[1])));
 					}
 				}
 			} catch (ClassNotFoundException e) {
@@ -82,6 +81,7 @@ public class Worker implements Runnable {
 	
 	public User searchUserID(int id){
 		
+		User user = new User(0, null, null);
 		try {
 			database = new DatabaseHelper();
 			database.prepareStatement("SELECT * FROM termproject.user WHERE id = ?");
@@ -89,18 +89,19 @@ public class Worker implements Runnable {
 			
 			ResultSet rs = database.getStatement().executeQuery();
 			database.getConnection().commit();
-			rs.next();
-			System.out.println(rs.getString(6));
-			if(rs.next() && rs.getString(6).charAt(0) == 'S')
-				return new Student(rs.getInt(1), rs.getString(4), rs.getString(5));
-			else if (rs.next() && rs.getString(6).charAt(0) == 'P')
-				return new Professor(rs.getInt(1), rs.getString(4), rs.getString(5));
 			
-			else return new User (0, null, null);
+			if(rs.next() && rs.getString(6).charAt(0) == 'S')
+				 user = new Student(rs.getInt(1), rs.getString(4), rs.getString(5));
+			else if (rs.next() && rs.getString(6).charAt(0) == 'p')
+				user = new Professor(rs.getInt(1), rs.getString(4), rs.getString(5));
+			System.out.println(user.getFirstName());
+			
+				
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return new User (0, null, null);
+		return user;
 	}
 	
 	public Student searchStudentsID(Student s){

@@ -33,6 +33,7 @@ public class PageNavigatorTest {
 
 	private JFrame frame;
 	private JButton btnJustDoesNothing;
+	private JLabel lblWelcome;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
 	private String name;
@@ -74,7 +75,7 @@ public class PageNavigatorTest {
 		lblDesirelearn.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		panel_1.add(lblDesirelearn, BorderLayout.WEST);
 		
-		JLabel lblWelcome = new JLabel("Welcome:" + name);
+		lblWelcome = new JLabel("Welcome:");
 		lblWelcome.setVerticalAlignment(SwingConstants.BOTTOM);
 		panel_1.add(lblWelcome, BorderLayout.EAST);
 		
@@ -102,9 +103,11 @@ public class PageNavigatorTest {
 		
 	}
 	
-	public void setName(String s){
-		name = s;
+	public void setName(String s)
+	{
+		lblWelcome.setText("Welcome: " + s);
 	}
+	
 	public void setVisible(boolean b)
 	{
 		frame.setVisible(b);
