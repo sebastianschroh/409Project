@@ -32,7 +32,9 @@ public class Client {
 		LoginWindow login = new LoginWindow(in, out);
 		while(!login.correctInfo())
 		{
+			int i = 0;
 		}
+		login.getFrame().dispose();
 		System.out.println("hello");
 		PageNavigatorTest p = new PageNavigatorTest(in, out);
 	}

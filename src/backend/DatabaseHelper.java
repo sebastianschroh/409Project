@@ -12,7 +12,7 @@ public class DatabaseHelper {
 	private String sql;
 	
 	public DatabaseHelper() throws SQLException{
-		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/termproject", "root", "passwordlmao");
+		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/termproject", "root", "password");
 		connection.setAutoCommit(false);
 	}
 	

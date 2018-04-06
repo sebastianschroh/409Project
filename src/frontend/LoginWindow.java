@@ -28,7 +28,7 @@ public class LoginWindow {
 	private JButton btnLogin;
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
-	private boolean correctInfo = false;
+	private volatile boolean correctInfo;
 	private LoginInfo login = null;
 	/**
 	 * Create the application.
@@ -111,7 +111,6 @@ public class LoginWindow {
 					if(received.isAuthentic() == true)
 					{
 						correctInfo = true;
-						frame.dispose();
 						//frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 					}
 					else
@@ -147,6 +146,10 @@ public class LoginWindow {
 	public void setLogin(LoginInfo b)
 	{
 		login = b;
+	}
+	
+	public JFrame getFrame(){
+		return frame;
 	}
 }
 
