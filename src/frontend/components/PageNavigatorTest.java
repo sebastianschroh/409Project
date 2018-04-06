@@ -47,6 +47,8 @@ public class PageNavigatorTest {
 	 */
 	public PageNavigatorTest(ObjectInputStream in, ObjectOutputStream out, Professor p) {
 		professor = p;
+		this.in = in;
+		this.out = out;
 		initialize();
 	}
 
@@ -106,7 +108,7 @@ public class PageNavigatorTest {
 		frame.getContentPane().add(panel_2, gbc_panel_2);
 		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.X_AXIS));
 		
-		
+		System.out.println(professor.getFirstName());
 		sendObject(professor);
 		sendObject("getcourses");
 		ArrayList<Course> course = null;
