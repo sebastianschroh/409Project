@@ -6,6 +6,9 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import frontend.components.PageNavigatorTest;
+import shareddata.Professor;
+import shareddata.Student;
+import shareddata.User;
 
 public class Client {
 
@@ -32,16 +35,45 @@ public class Client {
 		while(!login.correctInfo())
 		{
 		}
+		String id= "" + login.login().getUsername();
 		login.getFrame().dispose();
-		System.out.println("hello");
-
-		PageNavigatorTest p = new PageNavigatorTest(in, out);
-		System.out.println("hello");
+		String s = "getuser " + id;
+		sendObject(s);
+		try {
+			Object user = in.readObject();
+			if(user instanceof Student)
+			{
+				Student student = (Student) user;
+				PageNavigatorTest p = new PageNavigatorTest(in, out);
+				p.setName(student.getFirstName() + " " + student.getLastName());
+			}
+			else if(user instanceof Professor)
+			{
+				Professor professor = (Professor) user;
+				PageNavigatorTest p = new PageNavigatorTest(in,out);
+				p.setName(professor.getFirstName() + " " + professor.getLastName());
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static void main(String args[])
 	{
 		Client client = new Client("localhost", 6969);
 		client.communicate();
+	}
+	
+	public void sendObject(Object s)
+	{
+		try {
+		out.writeObject(s);
+		out.flush();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 }
