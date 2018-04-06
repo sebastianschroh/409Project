@@ -60,7 +60,7 @@ public class Client {
 			}
 			else if(user instanceof Professor)
 			{
-				Professor professor = (Professor) user;
+				Professor professor = new Professor(((Professor) user).getId(), ((Professor) user).getFirstName(), ((Professor) user).getLastName());
 				PageNavigatorTest p = new PageNavigatorTest(in,out, professor);
 				p.setName(professor.getFirstName() + " " + professor.getLastName());
 			}

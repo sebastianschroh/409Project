@@ -58,9 +58,9 @@ public class Worker implements Runnable {
 				}
 				if(input instanceof Professor)
 				{
+					System.out.print(((Professor) input).getFirstName());
 					Professor prof = (Professor) input;
-					input = in.readObject();
-					String s = (String) input;
+					String s = (String) in.readObject();
 					if(s.contains("getcourses"))
 					{
 						sendObject(browseCourses(prof.getId()));
