@@ -6,7 +6,6 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import frontend.components.PageNavigatorTest;
-import shareddata.LoginInfo;
 
 public class Client {
 
@@ -32,11 +31,12 @@ public class Client {
 		LoginWindow login = new LoginWindow(in, out);
 		while(!login.correctInfo())
 		{
-			int i = 0;
 		}
 		login.getFrame().dispose();
 		System.out.println("hello");
+
 		PageNavigatorTest p = new PageNavigatorTest(in, out);
+		System.out.println("hello");
 	}
 	
 	public static void main(String args[])
