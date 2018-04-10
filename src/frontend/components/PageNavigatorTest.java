@@ -1,6 +1,9 @@
 package frontend.components;
 
 import javax.swing.*;
+
+import backend.AddCourseListener;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -90,34 +93,7 @@ public class PageNavigatorTest {
 		
 		btnAddCourse = new JButton("Add course");
 		panel.add(btnAddCourse);
-		btnAddCourse.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent arg1)
-			{
-				final CourseCreator coursecreator = new CourseCreator();
-				coursecreator.getButton().addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg1)
-					{
-						String temp = coursecreator.getTextfieldText();
-						Course co = new Course(0, professor.getId(), temp,false);
-						sendObject(co);
-						sendObject("createcourse");
-						try {
-							Course t = (Course) in.readObject();
-							course.add(t);
-						} catch (ClassNotFoundException e) {
-							e.printStackTrace();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-						
-						coursecreator.getFrame().dispose();
-					}
-					
-				});
-			}
-		});
-		
+		btnAddCourse.addActionListener(new AddCourseListener(this));
 		btnRefresh = new JButton("Refresh");
 		panel.add(btnRefresh);
 		
@@ -256,8 +232,28 @@ public class PageNavigatorTest {
 	{
 		frame.setVisible(b);
 	}
-
 	
-
+	public Professor getProfessor()
+	{
+		return professor;
+	}
+	
+	public Object readObject()
+	{
+		Object obj = null;
+		try {
+			obj = in.readObject();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return obj;
+	}
+	
+	public ArrayList<Course> getCourseList()
+	{
+		return this.course;
+	}
 
 }

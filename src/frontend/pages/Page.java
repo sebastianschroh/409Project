@@ -21,12 +21,14 @@ public class Page extends JFrame {
 	
 	public Page(String s){
 		this.setLayout(new BorderLayout());
+		scrollPane = new JScrollPane();
 		courseName = new JLabel(s);
 		courseName.setHorizontalAlignment(JLabel.CENTER);
 		courseName.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		this.add(courseName, BorderLayout.NORTH);
-		coursePanel = new JPanel(new BoxLayout(coursePanel, BoxLayout.Y_AXIS));
-		for(int i = 0; i < assignments.size(); i ++)
+		coursePanel = new JPanel();
+		coursePanel.setLayout(new BoxLayout(coursePanel, BoxLayout.Y_AXIS));
+		//for(int i = 0; i < assignments.size(); i ++)
 		scrollPane.setViewportView(coursePanel);
 		this.add(scrollPane, BorderLayout.CENTER);
 		this.setSize(400, 400);
