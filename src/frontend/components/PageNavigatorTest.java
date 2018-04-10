@@ -23,6 +23,7 @@ import javax.swing.SwingConstants;
 
 import frontend.Client;
 import frontend.LoginWindow;
+import frontend.pages.Page;
 import shareddata.Course;
 import shareddata.LoginInfo;
 import shareddata.Professor;
@@ -83,6 +84,7 @@ public class PageNavigatorTest {
 		gbc_panel_1.gridy = 0;
 		frame.getContentPane().add(panel_1, gbc_panel_1);
 		panel_1.setLayout(new BorderLayout(0, 0));
+		panel_1.setBackground(Color.white);
 		
 		JLabel lblDesirelearn = new JLabel("Desire3Learn");
 		lblDesirelearn.setVerticalAlignment(SwingConstants.BOTTOM);
@@ -103,7 +105,7 @@ public class PageNavigatorTest {
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 1;
 		frame.getContentPane().add(panel, gbc_panel);
-		
+		panel.setBackground(Color.black);
 		btnSearchStudent = new JButton("Search Student");
 		panel.add(btnSearchStudent);
 		
@@ -118,7 +120,7 @@ public class PageNavigatorTest {
 					public void actionPerformed(ActionEvent arg1)
 					{
 						String temp = coursecreator.getTextfieldText();
-						Course co = new Course(0, professor.getId(), temp);
+						Course co = new Course(0, professor.getId(), temp,false);
 						sendObject(co);
 						sendObject("createcourse");
 						try {
@@ -147,8 +149,7 @@ public class PageNavigatorTest {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				panel_2.removeAll();
-				panel_2.repaint();
-				panel_2.revalidate();
+
 				for(int i = 0; i < course.size(); i++)
 				{
 					final CourseItem temp = new CourseItem(course.get(i));
@@ -176,10 +177,17 @@ public class PageNavigatorTest {
 							}
 						}
 					});
+					
+					temp.getView().addActionListener(new ActionListener(){
+						
+						public void actionPerformed(ActionEvent arg1){
+							Page page = new Page(temp.getCourse().getName());
+						}
+					});
 					panel_2.add(temp);
 				}
-				panel_2.repaint();
 				panel_2.revalidate();
+				panel_2.repaint();
 			}
 
 			});
@@ -195,7 +203,6 @@ public class PageNavigatorTest {
 		frame.getContentPane().add(panel_2, gbc_panel_2);
 		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.Y_AXIS));
 		
-		System.out.println(professor.getFirstName());
 		sendObject(professor);
 
 		sendObject("getcourses");
@@ -231,6 +238,13 @@ public class PageNavigatorTest {
 				{
 					button.setForeground(Color.red);
 				}
+			}
+		});
+		
+		courseItem.getView().addActionListener(new ActionListener(){
+			
+			public void actionPerformed(ActionEvent arg1){
+				Page page = new Page(courseItem.getCourse().getName());
 			}
 		});
 		panel_2.add(courseItem);

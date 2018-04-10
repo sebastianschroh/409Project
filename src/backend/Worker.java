@@ -44,7 +44,6 @@ public class Worker implements Runnable {
 				if(input instanceof Course) {
 					Course course = (Course)input;
 					String s = (String)in.readObject();
-					System.out.println(s);
 					if(s.contains("setCourseActivity"))
 					{
 						sendObject(setActive(course));
@@ -71,7 +70,6 @@ public class Worker implements Runnable {
 				}
 				if(input instanceof Professor)
 				{
-					System.out.print(((Professor) input).getFirstName());
 					Professor prof = (Professor) input;
 					String s = (String) in.readObject();
 					if(s.contains("getcourses"))
@@ -175,7 +173,7 @@ public class Worker implements Runnable {
 			database.getConnection().commit();
 			
 			while(rs.next()){
-				list.add(new Course(rs.getInt(1), rs.getInt(2), rs.getString(3)));
+				list.add(new Course(rs.getInt(1), rs.getInt(2), rs.getString(3),rs.getBoolean(4)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -213,7 +211,7 @@ public class Worker implements Runnable {
 	}
 	
 	public Course setActive(Course c){
-		Course course = new Course(0,0,null);
+		Course course = new Course(0,0,null,false);
 		try {
 			boolean b = false;
 			database = new DatabaseHelper();
@@ -225,7 +223,7 @@ public class Worker implements Runnable {
 			
 			if(rs.next())
 				b = rs.getBoolean(1);
-			course = new Course(c.getID(), c.getProfID(), c.getName());
+			course = new Course(c.getID(), c.getProfID(), c.getName(),b);
 			course.setActive(!b);
 			database.prepareStatement("UPDATE termproject.course SET active = ? WHERE id = ?" );
 			if(b) 

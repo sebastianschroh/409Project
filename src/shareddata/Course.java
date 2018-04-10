@@ -10,11 +10,11 @@ public class Course implements Serializable{
 	private String name;
 	private boolean active;
 	
-	public Course(int id, int prof_id, String name){
+	public Course(int id, int prof_id, String name, boolean b){
 		this.id = id;
 		this.prof_id = prof_id;
 		this.name = name;
-		active = true;
+		active = b;
 	}
 	
 	public void setID(int i){

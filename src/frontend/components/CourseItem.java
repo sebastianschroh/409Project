@@ -1,5 +1,6 @@
 package frontend.components;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 
@@ -21,8 +22,13 @@ public class CourseItem extends JPanel{
 		setLayout(new FlowLayout());
 		add(label);
 		active = new JButton("Set Active");
+		if(course.getStatus() == true)
+			active.setForeground(Color.black);
+		else
+			active.setForeground(Color.red);
 		view = new JButton("View Course");
 		add(active);
+		add(view);
 	}
 	
 	public JButton getActive() {
@@ -37,4 +43,8 @@ public class CourseItem extends JPanel{
 		return course;
 	}
 	
+	public void setCourse(Course c)
+	{
+		course = c;
+	}
 }
