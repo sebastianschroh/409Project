@@ -1,20 +1,22 @@
 package frontend.components;
 
+
 import javax.swing.*;
 
 import backend.AddCourseListener;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-
 import frontend.Client;
 import frontend.LoginWindow;
 import frontend.pages.Page;
 import shareddata.Course;
+import shareddata.LoginInfo;
 import shareddata.Professor;
 
 public class PageNavigatorTest {
@@ -24,6 +26,7 @@ public class PageNavigatorTest {
 	private Professor professor;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
+	private String name;
 	private JPanel panel;
 	private JPanel panel_2;
 	private JButton btnAddCourse;
@@ -40,7 +43,6 @@ public class PageNavigatorTest {
 		this.in = in;
 		this.out = out;
 		initialize();
-		addActionListener();
 	}
 
 	/**
@@ -93,7 +95,9 @@ public class PageNavigatorTest {
 		
 		btnAddCourse = new JButton("Add course");
 		panel.add(btnAddCourse);
+
 		btnAddCourse.addActionListener(new AddCourseListener(this));
+
 		btnRefresh = new JButton("Refresh");
 		panel.add(btnRefresh);
 		
@@ -136,7 +140,6 @@ public class PageNavigatorTest {
 						public void actionPerformed(ActionEvent arg1){
 							Page page = new Page(temp.getCourse().getName());
 						}
-
 					});
 					panel_2.add(temp);
 				}
@@ -204,11 +207,6 @@ public class PageNavigatorTest {
 		panel_2.add(courseItem);
 		}
 		frame.setVisible(true);
-		
-	}
-	
-	public void addActionListener()
-	{
 		
 	}
 	
