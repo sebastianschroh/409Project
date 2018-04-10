@@ -176,6 +176,10 @@ public class PageNavigatorTest {
 							}
 						}
 					});
+					
+					temp.getView().addActionListener(new ActionListener() {
+						
+					});
 					panel_2.add(temp);
 				}
 				panel_2.repaint();
