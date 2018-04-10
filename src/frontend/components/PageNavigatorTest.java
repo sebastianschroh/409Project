@@ -182,5 +182,14 @@ public class PageNavigatorTest {
 	{
 		return holdPanel;
 	}
-
+	
+	public void setHoldPanel(JPanel p)
+	{
+		this.holdPanel = p;
+	}
+	
+	public JScrollPane getScrollPane()
+	{
+		return scrollPane;
+	}
 }

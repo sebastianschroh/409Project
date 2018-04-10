@@ -13,7 +13,7 @@ import javax.swing.JScrollPane;
 
 import shareddata.Assignment;
 
-public class Page extends JFrame {
+public class Page extends JPanel {
 	private JLabel courseName;
 	private JPanel coursePanel;
 	private JScrollPane scrollPane;
@@ -24,13 +24,13 @@ public class Page extends JFrame {
 		scrollPane = new JScrollPane();
 		courseName = new JLabel(s);
 		courseName.setHorizontalAlignment(JLabel.CENTER);
-		courseName.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		this.add(courseName, BorderLayout.NORTH);
+		courseName.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
+		this.add(courseName, BorderLayout.CENTER);
 		coursePanel = new JPanel();
 		coursePanel.setLayout(new BoxLayout(coursePanel, BoxLayout.Y_AXIS));
 		//for(int i = 0; i < assignments.size(); i ++)
-		scrollPane.setViewportView(coursePanel);
-		this.add(scrollPane, BorderLayout.CENTER);
+//		scrollPane.setViewportView(coursePanel);
+//		this.add(scrollPane, BorderLayout.CENTER);
 		this.setSize(400, 400);
 		this.setVisible(true);
 	}

@@ -52,6 +52,11 @@ public class CourseItemListener implements ActionListener{
 	
 	public void view()
 	{
-		Page p = new Page(c.getCourse().getName());
+		p.getHoldPanel().removeAll();
+		p.setHoldPanel(new Page(c.getName()));
+		p.getHoldPanel().revalidate();
+		p.getHoldPanel().repaint();
+//		p.getScrollPane().revalidate();
+//		p.getScrollPane().repaint();
 	}
 }
