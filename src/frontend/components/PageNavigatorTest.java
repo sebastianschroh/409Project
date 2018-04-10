@@ -3,8 +3,8 @@ package frontend.components;
 
 import javax.swing.*;
 
-import backend.AddCourseListener;
-import backend.ViewCourseListener;
+import backend.Listeners.AddCourseListener;
+import backend.Listeners.ViewCourseListener;
 
 import java.awt.*;
 import java.io.*;
