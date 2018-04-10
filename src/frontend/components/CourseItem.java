@@ -2,7 +2,7 @@ package frontend.components;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;

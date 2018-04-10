@@ -1,39 +1,18 @@
 package frontend.components;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import java.awt.BorderLayout;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Color;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.awt.CardLayout;
-import javax.swing.SwingConstants;
 
 import frontend.Client;
 import frontend.LoginWindow;
 import frontend.pages.Page;
 import shareddata.Course;
-import shareddata.LoginInfo;
 import shareddata.Professor;
-
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
-import java.awt.Component;
-import javax.swing.JTabbedPane;
-import javax.swing.JButton;
-import java.awt.ComponentOrientation;
 
 public class PageNavigatorTest {
 
@@ -42,7 +21,6 @@ public class PageNavigatorTest {
 	private Professor professor;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
-	private String name;
 	private JPanel panel;
 	private JPanel panel_2;
 	private JButton btnAddCourse;
@@ -59,6 +37,7 @@ public class PageNavigatorTest {
 		this.in = in;
 		this.out = out;
 		initialize();
+		addActionListener();
 	}
 
 	/**
@@ -127,10 +106,8 @@ public class PageNavigatorTest {
 							Course t = (Course) in.readObject();
 							course.add(t);
 						} catch (ClassNotFoundException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						
@@ -183,6 +160,7 @@ public class PageNavigatorTest {
 						public void actionPerformed(ActionEvent arg1){
 							Page page = new Page(temp.getCourse().getName());
 						}
+
 					});
 					panel_2.add(temp);
 				}
@@ -250,6 +228,11 @@ public class PageNavigatorTest {
 		panel_2.add(courseItem);
 		}
 		frame.setVisible(true);
+		
+	}
+	
+	public void addActionListener()
+	{
 		
 	}
 	
