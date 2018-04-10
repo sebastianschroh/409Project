@@ -6,9 +6,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import frontend.components.PageNavigatorTest;
-import shareddata.Professor;
-import shareddata.Student;
-import shareddata.User;
+import shareddata.*;
+
 
 public class Client {
 

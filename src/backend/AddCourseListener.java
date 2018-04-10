@@ -2,10 +2,8 @@ package backend;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import frontend.components.*;
-import shareddata.Course;
 
 public class AddCourseListener implements ActionListener {
 

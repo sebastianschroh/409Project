@@ -52,32 +52,37 @@ public class LoginWindow {
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblUsername = new JLabel("Username:");
+		lblUsername.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 		lblUsername.setBounds(30, 140, 62, 13);
 		frame.getContentPane().add(lblUsername);
 		
 		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 		lblPassword.setBounds(30, 163, 62, 13);
 		frame.getContentPane().add(lblPassword);
 		
 		textField = new JTextField();
+		textField.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 		textField.setBounds(102, 137, 179, 19);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		btnLogin = new JButton("Login");
+		btnLogin.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 		btnLogin.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnLogin.setBounds(291, 136, 125, 40);
 		frame.getContentPane().add(btnLogin);
 		
 		passwordField = new JPasswordField();
+		passwordField.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 		passwordField.setBounds(102, 160, 179, 19);
 		frame.getContentPane().add(passwordField);
 		
 		JLabel lblDesirelearn = new JLabel("Desire3Learn");
 		lblDesirelearn.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lblDesirelearn.setForeground(Color.ORANGE);
-		lblDesirelearn.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		lblDesirelearn.setBounds(102, 31, 237, 40);
+		lblDesirelearn.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
+		lblDesirelearn.setBounds(100, 31, 316, 40);
 		frame.getContentPane().add(lblDesirelearn);
 		
 		lblPasswordError = new JLabel("");

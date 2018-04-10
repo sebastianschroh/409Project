@@ -1,10 +1,10 @@
 package frontend.components;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.WindowEvent;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -27,27 +27,31 @@ public class CourseCreator {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 383, 253);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100, 100, 464, 256);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblTitle = new JLabel("Course Creation");
-		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblTitle.setBounds(120, 10, 132, 35);
+		lblTitle.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
+		lblTitle.setBounds(145, 22, 172, 35);
 		frame.getContentPane().add(lblTitle);
 		
 		JLabel lblCourseName = new JLabel("Enter Course Name:");
-		lblCourseName.setBounds(35, 103, 101, 13);
+		lblCourseName.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+		lblCourseName.setBounds(35, 103, 167, 13);
 		frame.getContentPane().add(lblCourseName);
 		
 		textField = new JTextField();
-		textField.setBounds(130, 100, 186, 19);
+		textField.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+		textField.setBounds(147, 100, 198, 19);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		btnCreate = new JButton("Create");
-		btnCreate.setBounds(120, 153, 85, 21);
+		btnCreate.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+		btnCreate.setBounds(162, 154, 85, 21);
 		frame.getContentPane().add(btnCreate);
+		
 	}
 	
 	public JButton getButton()
