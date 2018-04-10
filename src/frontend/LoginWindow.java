@@ -4,9 +4,7 @@ package frontend;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
 import shareddata.LoginInfo;
-
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.Font;

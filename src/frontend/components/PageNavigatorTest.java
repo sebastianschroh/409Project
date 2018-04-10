@@ -1,38 +1,18 @@
 package frontend.components;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import java.awt.BorderLayout;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Color;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.awt.CardLayout;
-import javax.swing.SwingConstants;
 
 import frontend.Client;
 import frontend.LoginWindow;
+import frontend.pages.Page;
 import shareddata.Course;
-import shareddata.LoginInfo;
 import shareddata.Professor;
-
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
-import java.awt.Component;
-import javax.swing.JTabbedPane;
-import javax.swing.JButton;
-import java.awt.ComponentOrientation;
 
 public class PageNavigatorTest {
 
@@ -41,7 +21,6 @@ public class PageNavigatorTest {
 	private Professor professor;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
-	private String name;
 	private JPanel panel;
 	private JPanel panel_2;
 	private JButton btnAddCourse;
@@ -58,6 +37,7 @@ public class PageNavigatorTest {
 		this.in = in;
 		this.out = out;
 		initialize();
+		addActionListener();
 	}
 
 	/**
@@ -83,6 +63,7 @@ public class PageNavigatorTest {
 		gbc_panel_1.gridy = 0;
 		frame.getContentPane().add(panel_1, gbc_panel_1);
 		panel_1.setLayout(new BorderLayout(0, 0));
+		panel_1.setBackground(Color.white);
 		
 		JLabel lblDesirelearn = new JLabel("Desire3Learn");
 		lblDesirelearn.setVerticalAlignment(SwingConstants.BOTTOM);
@@ -103,7 +84,7 @@ public class PageNavigatorTest {
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 1;
 		frame.getContentPane().add(panel, gbc_panel);
-		
+		panel.setBackground(Color.black);
 		btnSearchStudent = new JButton("Search Student");
 		panel.add(btnSearchStudent);
 		
@@ -118,17 +99,15 @@ public class PageNavigatorTest {
 					public void actionPerformed(ActionEvent arg1)
 					{
 						String temp = coursecreator.getTextfieldText();
-						Course co = new Course(0, professor.getId(), temp);
+						Course co = new Course(0, professor.getId(), temp,false);
 						sendObject(co);
 						sendObject("createcourse");
 						try {
 							Course t = (Course) in.readObject();
 							course.add(t);
 						} catch (ClassNotFoundException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						
@@ -147,8 +126,7 @@ public class PageNavigatorTest {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				panel_2.removeAll();
-				panel_2.repaint();
-				panel_2.revalidate();
+
 				for(int i = 0; i < course.size(); i++)
 				{
 					final CourseItem temp = new CourseItem(course.get(i));
@@ -177,13 +155,17 @@ public class PageNavigatorTest {
 						}
 					});
 					
-					temp.getView().addActionListener(new ActionListener() {
+					temp.getView().addActionListener(new ActionListener(){
 						
+						public void actionPerformed(ActionEvent arg1){
+							Page page = new Page(temp.getCourse().getName());
+						}
+
 					});
 					panel_2.add(temp);
 				}
-				panel_2.repaint();
 				panel_2.revalidate();
+				panel_2.repaint();
 			}
 
 			});
@@ -199,7 +181,6 @@ public class PageNavigatorTest {
 		frame.getContentPane().add(panel_2, gbc_panel_2);
 		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.Y_AXIS));
 		
-		System.out.println(professor.getFirstName());
 		sendObject(professor);
 
 		sendObject("getcourses");
@@ -237,9 +218,21 @@ public class PageNavigatorTest {
 				}
 			}
 		});
+		
+		courseItem.getView().addActionListener(new ActionListener(){
+			
+			public void actionPerformed(ActionEvent arg1){
+				Page page = new Page(courseItem.getCourse().getName());
+			}
+		});
 		panel_2.add(courseItem);
 		}
 		frame.setVisible(true);
+		
+	}
+	
+	public void addActionListener()
+	{
 		
 	}
 	
