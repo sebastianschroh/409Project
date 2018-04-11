@@ -19,7 +19,7 @@ public class CourseItem extends BoxItem{
 	public CourseItem(Course c) {
 		super(c.getName());
 		course = c;
-		listener = new CourseItemListener();
+		listener = new CourseItemListener(null, null);
 		active = new JButton("Set Active");
 		active.addActionListener(listener);
 		if(course.getStatus() == true)

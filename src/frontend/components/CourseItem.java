@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import backend.CourseItemListener;
+import backend.Listeners.CourseItemListener;
 import shareddata.Course;
 
 public class CourseItem extends JPanel{

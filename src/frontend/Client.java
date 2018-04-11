@@ -51,18 +51,18 @@ public class Client {
 		sendObject(s);
 		try {
 			Object user = in.readObject();
-			if(user instanceof Student)
-			{
-				Student student = (Student) user;
-				//PageNavigatorTest p = new PageNavigatorTest(in, out, student);
-				//p.setName(student.getFirstName() + " " + student.getLastName());
-			}
-			else if(user instanceof Professor)
-			{
+//			if(user instanceof Student)
+//			{
+//				Student student = (Student) user;
+//				PageNavigatorTest p = new PageNavigatorTest(in, out, student);
+//				p.setName(student.getFirstName() + " " + student.getLastName());
+//			}
+//			else if(user instanceof Professor)
+//			{
 				Professor professor = new Professor(((Professor) user).getId(), ((Professor) user).getFirstName(), ((Professor) user).getLastName());
 				PageNavigatorTest p = new PageNavigatorTest(in,out, professor);
 				p.setName(professor.getFirstName() + " " + professor.getLastName());
-			}
+//			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

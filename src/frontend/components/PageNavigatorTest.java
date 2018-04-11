@@ -3,14 +3,14 @@ package frontend.components;
 
 import javax.swing.*;
 
-import backend.Listeners.AddCourseListener;
-import backend.Listeners.ViewCourseListener;
 
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import shareddata.*;
 import javax.swing.border.EtchedBorder;
+
+import backend.Listeners.*;
 
 public class PageNavigatorTest {
 
@@ -42,6 +42,7 @@ public class PageNavigatorTest {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings("unchecked")
 	private void initialize() {
 		frame = new JFrame();
 		frame.setResizable(false);
@@ -185,7 +186,7 @@ public class PageNavigatorTest {
 	
 	public void setHoldPanel(JPanel p)
 	{
-		this.holdPanel = p;
+		this.scrollPane.setViewportView(p);
 	}
 	
 	public JScrollPane getScrollPane()
