@@ -13,13 +13,14 @@ import shareddata.Course;
 
 public class CourseItem extends BoxItem{
 	private Course course;
-	private JButton active, viewSubmissions, viewStudents, addStudents;
+	private JButton active, viewSubmissions, viewStudents, addStudents, viewAssignments, addAssignment, emailStudents;
 	private CourseItemListener listener;
 	
-	public CourseItem(Course c) {
+	public CourseItem(Course c, boolean isProf) {
 		super(c.getName());
 		course = c;
 		listener = new CourseItemListener(null, null);
+		if(isProf == true){
 		active = new JButton("Set Active");
 		active.addActionListener(listener);
 		if(course.getStatus() == true)
@@ -36,6 +37,7 @@ public class CourseItem extends BoxItem{
 		add(viewStudents);
 		add(viewSubmissions);
 		add(addStudents);
+		}
 	}
 	public Course getCourse() {
 		return course;
