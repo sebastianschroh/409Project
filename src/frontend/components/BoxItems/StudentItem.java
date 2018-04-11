@@ -27,5 +27,11 @@ public class StudentItem extends BoxItem{
 		}
 		
 	}
-
+	public Student getStudent(){
+		return student;
+	}
+	
+	public void setStudent(Student s){
+		student = s;
+	}
 }
