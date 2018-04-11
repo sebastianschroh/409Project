@@ -56,6 +56,5 @@ public class CourseItemListener implements ActionListener{
 	{
 		
 		Page p = new Page(c.getCourse().getName());
-		this.p.setHoldPanel(p);
 	}
 }
