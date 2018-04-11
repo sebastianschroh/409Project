@@ -10,6 +10,7 @@ public class BoxItem extends JPanel{
 	public BoxItem(String s){
 		setLayout(new FlowLayout());
 		label = new JLabel(s);
+		label.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 		add(label);
 		this.setPreferredSize(new Dimension(941,100));
 		this.setMinimumSize(new Dimension(941,100));

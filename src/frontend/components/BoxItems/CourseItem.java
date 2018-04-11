@@ -1,7 +1,7 @@
 package frontend.components.BoxItems;
 
 import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.JButton;
 
@@ -25,11 +25,13 @@ public class CourseItem extends BoxItem{
 		viewAssignments.addActionListener(listener);
 		viewAssignments.setBackground(Color.black);
 		viewAssignments.setForeground(Color.white);
+		viewAssignments.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 		add(viewAssignments);
 		
 		if(isProf == true){
 		active = new JButton("Set Active");
 		active.addActionListener(listener);
+		active.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 		if(course.getStatus() == true)
 			active.setForeground(Color.white);
 		else
@@ -40,21 +42,25 @@ public class CourseItem extends BoxItem{
 		viewStudents.addActionListener(listener);
 		viewStudents.setBackground(Color.black);
 		viewStudents.setForeground(Color.white);
+		viewStudents.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 		
 		addStudents = new JButton("Add Students");
 		addStudents.addActionListener(listener);
 		addStudents.setBackground(Color.black);
 		addStudents.setForeground(Color.white);
+		addStudents.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 		
 		addAssignment = new JButton("Add Assignment");
 		addAssignment.addActionListener(listener);
 		addAssignment.setBackground(Color.black);
 		addAssignment.setForeground(Color.white);
+		addAssignment.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 		
 		emailStudents = new JButton("Email Students");
 		emailStudents.addActionListener(listener);
 		emailStudents.setBackground(Color.black);
 		emailStudents.setForeground(Color.white);
+		emailStudents.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 		
 		add(emailStudents);
 		add(addAssignment);
@@ -67,6 +73,7 @@ public class CourseItem extends BoxItem{
 			emailProf.addActionListener(listener);
 			emailProf.setBackground(Color.black);
 			emailProf.setForeground(Color.white);
+			emailProf.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 			add(emailProf);
 		}
 
