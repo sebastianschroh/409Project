@@ -44,7 +44,7 @@ public class CourseItemListener implements ActionListener{
 		c.getCourse().setActive(course.getStatus());
 		if(course.getStatus() == true)
 		{
-			c.getActive().setForeground(Color.black);
+			c.getActive().setForeground(Color.white);
 		}
 		else
 		{
@@ -56,6 +56,5 @@ public class CourseItemListener implements ActionListener{
 	{
 		
 		Page p = new Page(c.getCourse().getName());
-		this.p.setHoldPanel(p);
 	}
 }

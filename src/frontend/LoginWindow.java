@@ -46,6 +46,7 @@ public class LoginWindow {
 	private void initialize() {
 		
 		frame = new JFrame();
+		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 497, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,6 +69,8 @@ public class LoginWindow {
 		textField.setColumns(10);
 		
 		btnLogin = new JButton("Login");
+		btnLogin.setForeground(Color.WHITE);
+		btnLogin.setBackground(Color.BLACK);
 		btnLogin.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 		btnLogin.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnLogin.setBounds(291, 136, 125, 40);
