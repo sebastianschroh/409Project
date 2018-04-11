@@ -15,17 +15,22 @@ import backend.Listeners.*;
 public class PageNavigatorTest {
 
 	private JFrame frame;
-	private JLabel lblWelcome;
+
 	private User user;
 	private boolean isProf;
+	
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
+	
 	private JPanel panel;
 	private JPanel holdPanel;
-	private JButton btnAddCourse;
-	private ArrayList<Course> course = null;
-	private JButton btnViewCourse;
 	private JScrollPane scrollPane;
+
+	private ArrayList<Course> course = null;
+	private JButton btnAddCourse;
+	private JButton btnViewCourse;
+	private JLabel lblWelcome;
+	
 	/**
 	 * Create the application.
 	 */
