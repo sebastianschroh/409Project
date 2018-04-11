@@ -16,7 +16,7 @@ public class ViewCourseListener implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
-		
+		p.setHoldPanel(p.getHoldPanel());
 		p.getHoldPanel().removeAll();
 
 		for(int i = 0; i < p.getCourseList().size(); i++)
