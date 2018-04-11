@@ -3,22 +3,14 @@ package backend;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-import shareddata.Assignment;
-import shareddata.Course;
-import shareddata.LoginInfo;
-import shareddata.Professor;
-import shareddata.Student;
-import shareddata.StudentEnrollment;
-import shareddata.User;
+import shareddata.*;
 
 public class Worker implements Runnable {
 	
+	@SuppressWarnings("unused")
 	private Socket accessSock;
 	private ObjectInputStream in;
 	private ObjectOutputStream out;

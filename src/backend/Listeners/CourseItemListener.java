@@ -3,13 +3,8 @@ package backend.Listeners;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import frontend.components.CourseItem;
 import frontend.components.PageNavigatorTest;
-import frontend.pages.Page;
 import shareddata.Course;
 
 public class CourseItemListener implements ActionListener{
@@ -55,6 +50,5 @@ public class CourseItemListener implements ActionListener{
 	public void view()
 	{
 		
-		Page p = new Page(c.getCourse().getName());
 	}
 }

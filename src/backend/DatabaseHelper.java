@@ -19,7 +19,7 @@ public class DatabaseHelper {
 	
 	private PreparedStatement statement;
 	private Connection connection;
-	private String sql;
+
 	
 	public DatabaseHelper() throws SQLException{
 		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/termproject?autoReconnect=true&useSSL=false", "root", "passwordlmao");

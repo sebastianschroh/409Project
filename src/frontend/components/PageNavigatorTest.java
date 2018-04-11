@@ -17,6 +17,7 @@ public class PageNavigatorTest {
 	private JFrame frame;
 	private JLabel lblWelcome;
 	private Professor professor;
+	private boolean isProf;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
 	private JPanel panel;
@@ -29,10 +30,14 @@ public class PageNavigatorTest {
 	/**
 	 * Create the application.
 	 */
-	public PageNavigatorTest(ObjectInputStream in, ObjectOutputStream out, Professor p) {
+	public PageNavigatorTest(ObjectInputStream in, ObjectOutputStream out, User p) {
 		this.in = in;
 		this.out = out;
-		professor = p;
+		if(p instanceof Professor)
+		{
+			professor = (Professor) p;
+			isProf = true;
+		}
 		this.in = in;
 		this.out = out;
 		initialize();
@@ -87,12 +92,14 @@ public class PageNavigatorTest {
 		gbc_panel.gridy = 1;
 		frame.getContentPane().add(panel, gbc_panel);
 		panel.setBackground(Color.black);
-		
-		btnAddCourse = new JButton("Add course");
-		btnAddCourse.setForeground(Color.WHITE);
-		btnAddCourse.setBackground(Color.BLACK);
-		btnAddCourse.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
-		panel.add(btnAddCourse);
+		if(isProf)
+		{
+			btnAddCourse = new JButton("Add course");
+			btnAddCourse.setForeground(Color.WHITE);
+			btnAddCourse.setBackground(Color.BLACK);
+			btnAddCourse.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+			panel.add(btnAddCourse);
+		}
 		
 		horizontalStrut = Box.createHorizontalStrut(20);
 		horizontalStrut.setPreferredSize(new Dimension(100, 0));

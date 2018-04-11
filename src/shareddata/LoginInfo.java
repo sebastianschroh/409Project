@@ -7,14 +7,11 @@ public class LoginInfo implements Serializable{
 	private static final long serialVersionUID = 420;
 	private int username;
 	private String password;
-	private boolean authenticate;
-
 	private boolean authenticated;
 	
 	public LoginInfo(int name, String pass){
 		username = name;
 		password = pass;
-		authenticate = false;
 		authenticated = false;
 	}
 	
