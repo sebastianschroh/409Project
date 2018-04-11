@@ -45,6 +45,7 @@ public class PageNavigatorTest {
 	@SuppressWarnings("unchecked")
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 640, 665);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -88,6 +89,8 @@ public class PageNavigatorTest {
 		panel.setBackground(Color.black);
 		
 		btnAddCourse = new JButton("Add course");
+		btnAddCourse.setForeground(Color.WHITE);
+		btnAddCourse.setBackground(Color.BLACK);
 		btnAddCourse.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 		panel.add(btnAddCourse);
 		
@@ -95,6 +98,8 @@ public class PageNavigatorTest {
 		horizontalStrut.setPreferredSize(new Dimension(100, 0));
 		panel.add(horizontalStrut);
 		btnViewCourse = new JButton("View Courses");
+		btnViewCourse.setForeground(Color.WHITE);
+		btnViewCourse.setBackground(Color.BLACK);
 		btnViewCourse.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 		panel.add(btnViewCourse);
 		
@@ -109,6 +114,7 @@ public class PageNavigatorTest {
 
 				
 		holdPanel = new JPanel();
+		holdPanel.setBackground(Color.WHITE);
 		scrollPane.setViewportView(holdPanel);
 		holdPanel.setLayout(new BoxLayout(holdPanel, BoxLayout.Y_AXIS));
 		
