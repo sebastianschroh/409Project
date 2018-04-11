@@ -20,7 +20,7 @@ public class CreateCourseListener implements ActionListener {
 
 	public void actionPerformed(ActionEvent arg0) {
 		String temp = c.getTextfieldText();
-		Course co = new Course(0, p.getProfessor().getId(), temp,false);
+		Course co = new Course(0, p.getUser().getId(), temp,false);
 		p.sendObject(co);
 		p.sendObject("createcourse");
 		Course t = (Course) p.readObject();

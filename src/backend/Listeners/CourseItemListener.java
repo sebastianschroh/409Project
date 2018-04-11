@@ -3,7 +3,7 @@ package backend.Listeners;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import frontend.components.CourseItem;
+import frontend.components.BoxItems.CourseItem;
 import frontend.components.PageNavigatorTest;
 import shareddata.Course;
 
@@ -23,10 +23,10 @@ public class CourseItemListener implements ActionListener{
 		{
 			activate();
 		}
-		if(e.getSource() == c.getView())
-		{
-			view();
-		}
+//		if(e.getSource() == c.getView())
+//		{
+//			view();
+//		}
 	}
 
 	
@@ -46,9 +46,5 @@ public class CourseItemListener implements ActionListener{
 			c.getActive().setForeground(Color.red);
 		}
 	}
-	
-	public void view()
-	{
-		
-	}
+
 }

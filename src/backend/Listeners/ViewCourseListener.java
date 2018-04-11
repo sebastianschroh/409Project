@@ -3,7 +3,7 @@ package backend.Listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import frontend.components.CourseItem;
+import frontend.components.BoxItems.CourseItem;
 import frontend.components.PageNavigatorTest;
 
 public class ViewCourseListener implements ActionListener {
@@ -21,7 +21,7 @@ public class ViewCourseListener implements ActionListener {
 
 		for(int i = 0; i < p.getCourseList().size(); i++)
 		{
-			CourseItem temp = new CourseItem(p.getCourseList().get(i),p);
+			CourseItem temp = new CourseItem(p.getCourseList().get(i),p,p.isProf());
 			p.getHoldPanel().add(temp);
 		}
 		

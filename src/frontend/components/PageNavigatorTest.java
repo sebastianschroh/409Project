@@ -16,7 +16,7 @@ public class PageNavigatorTest {
 
 	private JFrame frame;
 	private JLabel lblWelcome;
-	private Professor professor;
+	private User user;
 	private boolean isProf;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
@@ -26,7 +26,6 @@ public class PageNavigatorTest {
 	private ArrayList<Course> course = null;
 	private JButton btnViewCourse;
 	private JScrollPane scrollPane;
-	private Component horizontalStrut;
 	/**
 	 * Create the application.
 	 */
@@ -35,7 +34,7 @@ public class PageNavigatorTest {
 		this.out = out;
 		if(p instanceof Professor)
 		{
-			professor = (Professor) p;
+			user = (Professor) p;
 			isProf = true;
 		}
 		this.in = in;
@@ -52,10 +51,10 @@ public class PageNavigatorTest {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 640, 665);
+		frame.setBounds(100, 100, 945, 666);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{618};
+		gridBagLayout.columnWidths = new int[]{941};
 		gridBagLayout.rowHeights = new int[]{72, 31, 472, 0};
 		gridBagLayout.columnWeights = new double[]{1.0};
 		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 1.0, Double.MIN_VALUE};
@@ -100,10 +99,6 @@ public class PageNavigatorTest {
 			btnAddCourse.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 			panel.add(btnAddCourse);
 		}
-		
-		horizontalStrut = Box.createHorizontalStrut(20);
-		horizontalStrut.setPreferredSize(new Dimension(100, 0));
-		panel.add(horizontalStrut);
 		btnViewCourse = new JButton("View Courses");
 		btnViewCourse.setForeground(Color.WHITE);
 		btnViewCourse.setBackground(Color.BLACK);
@@ -125,19 +120,12 @@ public class PageNavigatorTest {
 		scrollPane.setViewportView(holdPanel);
 		holdPanel.setLayout(new BoxLayout(holdPanel, BoxLayout.Y_AXIS));
 		
-		sendObject(professor);
-
+		sendObject(user);
 		sendObject("getcourses");
-		course = null;
-		try {
-			course = (ArrayList<Course>) in.readObject();
-		} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-		} catch (IOException e) {
-					e.printStackTrace();
-		}
-		frame.setVisible(true);
 		
+		course = (ArrayList<Course>) readObject();
+	
+		frame.setVisible(true);
 	}
 	
 	public void addActionListener()
@@ -159,21 +147,6 @@ public class PageNavigatorTest {
 		}
 	}
 	
-	public void setName(String s)
-	{
-		lblWelcome.setText("Welcome: " + s);
-	}
-	
-	public void setVisible(boolean b)
-	{
-		frame.setVisible(b);
-	}
-	
-	public Professor getProfessor()
-	{
-		return professor;
-	}
-	
 	public Object readObject()
 	{
 		Object obj = null;
@@ -187,6 +160,21 @@ public class PageNavigatorTest {
 		return obj;
 	}
 	
+	public void setName(String s)
+	{
+		lblWelcome.setText("Welcome: " + s);
+	}
+	
+	public void setVisible(boolean b)
+	{
+		frame.setVisible(b);
+	}
+	
+	public User getUser()
+	{
+		return user;
+	}
+		
 	public ArrayList<Course> getCourseList()
 	{
 		return this.course;
@@ -205,5 +193,10 @@ public class PageNavigatorTest {
 	public JScrollPane getScrollPane()
 	{
 		return scrollPane;
+	}
+	
+	public boolean isProf()
+	{
+		return isProf;
 	}
 }
