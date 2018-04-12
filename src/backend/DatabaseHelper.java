@@ -289,4 +289,24 @@ public class DatabaseHelper {
 		}
 		return list;
 	}
+	
+	public ArrayList<Assignment> getAssignments(Course c){
+		ArrayList<Assignment> list = new ArrayList<Assignment>();
+		
+		try{
+			prepareStatement("SELECT * FROM termproject.assignment WHERE course_id = ?");
+			getStatement().setInt(1,  c.getID());
+			
+			ResultSet rs = getStatement().executeQuery();
+			getConnection().commit();
+			
+			while(rs.next()){
+				list.add(new Assignment(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getBoolean(5), rs.getString(6)));
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return list;
+	}
 }
