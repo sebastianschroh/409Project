@@ -22,7 +22,12 @@ public class CourseItem extends BoxItem{
 	public CourseItem(Course c, PageNavigatorTest p, boolean isProf) {
 		
 		super(c.getName());
+		
 		course = c;
+		p.sendObject(course);
+		p.sendObject("getstudents");
+		students = (ArrayList<Student>) p.readObject();
+		
 		listener = new CourseItemListener(this, p);
 		viewAssignments= new JButton("View Assignments");
 		viewAssignments.addActionListener(listener);
@@ -79,11 +84,6 @@ public class CourseItem extends BoxItem{
 			emailProf.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 			add(emailProf);
 		}
-		
-		p.sendObject(course);
-		p.sendObject("getstudents");
-		
-		students = (ArrayList<Student>) p.readObject();
 
 	}
 	public Course getCourse() {

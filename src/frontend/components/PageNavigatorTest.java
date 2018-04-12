@@ -42,6 +42,11 @@ public class PageNavigatorTest {
 			user = (Professor) p;
 			isProf = true;
 		}
+		else
+		{
+			user = (Student) p;
+			isProf = false;
+		}
 		this.in = in;
 		this.out = out;
 		initialize();
@@ -54,7 +59,7 @@ public class PageNavigatorTest {
 	@SuppressWarnings("unchecked")
 	private void initialize() {
 		frame = new JFrame();
-		frame.getContentPane().setBackground(Color.WHITE);
+		frame.getContentPane().setBackground(Color.BLACK);
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 945, 666);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,7 +79,7 @@ public class PageNavigatorTest {
 		gbc_panel_1.gridy = 0;
 		frame.getContentPane().add(panel_1, gbc_panel_1);
 		panel_1.setLayout(new BorderLayout(0, 0));
-		panel_1.setBackground(Color.white);
+		panel_1.setBackground(Color.BLACK);
 		
 		JLabel lblDesirelearn = new JLabel("Desire3Learn");
 		lblDesirelearn.setVerticalAlignment(SwingConstants.BOTTOM);
@@ -95,18 +100,18 @@ public class PageNavigatorTest {
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 1;
 		frame.getContentPane().add(panel, gbc_panel);
-		panel.setBackground(Color.black);
+		panel.setBackground(Color.ORANGE);
 		if(isProf)
 		{
 			btnAddCourse = new JButton("Add course");
 			btnAddCourse.setForeground(Color.WHITE);
-			btnAddCourse.setBackground(Color.BLACK);
+			btnAddCourse.setBackground(Color.ORANGE);
 			btnAddCourse.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 			panel.add(btnAddCourse);
 		}
 		btnViewCourse = new JButton("View Courses");
 		btnViewCourse.setForeground(Color.WHITE);
-		btnViewCourse.setBackground(Color.BLACK);
+		btnViewCourse.setBackground(Color.ORANGE);
 		btnViewCourse.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 		panel.add(btnViewCourse);
 		
@@ -121,7 +126,7 @@ public class PageNavigatorTest {
 
 				
 		holdPanel = new JPanel();
-		holdPanel.setBackground(Color.WHITE);
+		holdPanel.setBackground(Color.BLACK);
 		scrollPane.setViewportView(holdPanel);
 		holdPanel.setLayout(new BoxLayout(holdPanel, BoxLayout.Y_AXIS));
 		

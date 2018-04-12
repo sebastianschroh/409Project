@@ -1,5 +1,8 @@
 package frontend.components.BoxItems;
 
+import java.awt.Color;
+import java.awt.Font;
+
 import javax.swing.JButton;
 
 import backend.Listeners.StudentItemListener;
@@ -19,11 +22,17 @@ public class StudentItem extends BoxItem{
 		if(c == 'e'){
 			enroll = new JButton("Enroll Student");
 			enroll.addActionListener(listener);
+			enroll.setBackground(Color.black);
+			enroll.setForeground(Color.white);
+			enroll.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 			add(enroll);
 		}
 		if(c == 'u'){
 			unenroll = new JButton("Unenroll Student");
 			unenroll.addActionListener(listener);
+			unenroll.setBackground(Color.black);
+			unenroll.setForeground(Color.white);
+			unenroll.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 			add(unenroll);
 		}
 		

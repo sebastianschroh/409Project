@@ -45,9 +45,9 @@ public class Worker implements Runnable {
 					{
 						sendObject(database.addCourse(course));
 					}
-					else if(s.contains("get"))
+					else if(s.contains("getstudents"))
 					{
-					
+						sendObject(database.getStudentsEnrolled(course));
 					}
 				}
 				if(input instanceof LoginInfo)
@@ -74,6 +74,16 @@ public class Worker implements Runnable {
 						sendObject(database.browseCourses(prof.getId()));
 					}
 				}
+				if(input instanceof Student)
+				{
+					Student student = (Student) input;
+					String s = (String) in.readObject();
+					if(s.contains(("getcourses")))
+					{
+						sendObject(database.browseCourses(student.getId()));
+					}
+				}
+
 			} catch (ClassNotFoundException e) {
 				
 				e.printStackTrace();
