@@ -38,11 +38,7 @@ public class CourseItem extends BoxItem{
 		p.sendObject("getassignments");
 		
 		assignments = (ArrayList<Assignment>) p.readObject();
-		
-//		p.sendObject(course);
-//		p.sendObject("getemails");
 
-//		emails = (ArrayList<String>) p.readObject();
 		
 		
 		listener = new CourseItemListener(this, p);
@@ -101,6 +97,7 @@ public class CourseItem extends BoxItem{
 			emailProf.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 			add(emailProf);
 		}
+
 	}
 	public Course getCourse() {
 		return course;
