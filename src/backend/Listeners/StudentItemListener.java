@@ -2,6 +2,8 @@ package backend.Listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import frontend.components.BoxItems.*;
 import frontend.components.*;
 import shareddata.*;
@@ -32,6 +34,16 @@ public class StudentItemListener implements ActionListener{
 		StudentEnrollment s = new StudentEnrollment(this.s.getStudent().getId(), c.getCourse().getID());
 		p.sendObject(s);
 		p.sendObject("unenroll");
+		p.sendObject(c.getCourse());
+		p.sendObject("getstudents");
+		c.setStudentList((ArrayList<Student>) p.readObject());
+	}
+	
+	public void enroll()
+	{
+		p.sendObject(c.getCourse());
+		p.sendObject("getstudents");
+		c.setStudentList((ArrayList<Student>) p.readObject());
 	}
 
 }

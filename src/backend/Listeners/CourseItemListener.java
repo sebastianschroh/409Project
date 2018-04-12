@@ -38,6 +38,10 @@ public class CourseItemListener implements ActionListener{
 		{
 			viewAssignments();
 		}
+		if(e.getSource() == c.getAddStudents())
+		{
+			addStudents();
+		}
 	}
 
 	
@@ -90,6 +94,11 @@ public class CourseItemListener implements ActionListener{
 	public void emailStudents(){
 		StudentEmailCreator emailWindow = new StudentEmailCreator();
 		CreateEmailListener listener = new CreateEmailListener(p, c, emailWindow);
+	}
+	
+	public void addStudents()
+	{
+		
 	}
 
 }

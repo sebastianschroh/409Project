@@ -24,7 +24,7 @@ public class StudentItem extends BoxItem{
 			enroll.addActionListener(listener);
 			enroll.setBackground(Color.black);
 			enroll.setForeground(Color.white);
-			enroll.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+			enroll.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 			add(enroll);
 		}
 		if(ch == 'u'){
@@ -32,7 +32,7 @@ public class StudentItem extends BoxItem{
 			unenroll.addActionListener(listener);
 			unenroll.setBackground(Color.black);
 			unenroll.setForeground(Color.white);
-			unenroll.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+			unenroll.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 			add(unenroll);
 		}
 		
