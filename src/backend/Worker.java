@@ -95,7 +95,7 @@ public class Worker implements Runnable {
 				if(input instanceof Email){
 					Email email = (Email) input;
 					for(int i = 0; i < email.getRecipients().size(); i ++){
-						EmailHelper helper = new EmailHelper(email.getRecipients().get(i), email.getSubject(), email.getContent());
+						new EmailHelper(email.getRecipients().get(i), email.getSubject(), email.getContent());
 					}
 				}
 
@@ -103,6 +103,7 @@ public class Worker implements Runnable {
 				
 				e.printStackTrace();
 			} catch (IOException e) {
+				System.out.println(e.getLocalizedMessage());
 				e.printStackTrace();
 				closeConnection();
 				break;

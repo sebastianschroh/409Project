@@ -1,26 +1,45 @@
 package frontend.components;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.event.WindowEvent;
+import java.awt.EventQueue;
 
+import javax.swing.JFrame;
+import java.awt.BorderLayout;
+import javax.swing.JTextPane;
+import javax.swing.BoxLayout;
+import java.awt.FlowLayout;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.JTextArea;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class StudentEmailCreator {
 
 	private JFrame frame;
-	private JTextField subjectField;
-	private JTextField messageField;
-	private JButton send;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					StudentEmailCreator window = new StudentEmailCreator();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the application.
 	 */
 	public StudentEmailCreator() {
 		initialize();
-		frame.setVisible(true);
 	}
 
 	/**
@@ -28,59 +47,35 @@ public class StudentEmailCreator {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 464, 256);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JLabel lblTitle = new JLabel("Email Students");
-		lblTitle.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
-		lblTitle.setBounds(145, 22, 172, 35);
-		frame.getContentPane().add(lblTitle);
+		JPanel panel = new JPanel();
+		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		panel.setLayout(null);
 		
-		JLabel lblSubject = new JLabel("Subject: ");
-		lblSubject.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
-		lblSubject.setBounds(35, 103, 167, 13);
-		frame.getContentPane().add(lblSubject);
+		JLabel lblSubject = new JLabel("Subject:");
+		lblSubject.setBounds(10, 16, 40, 14);
+		panel.add(lblSubject);
 		
-		subjectField = new JTextField();
-		subjectField.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
-		subjectField.setBounds(147, 100, 198, 19);
-		frame.getContentPane().add(subjectField);
-		subjectField.setColumns(10);
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(60, 11, 364, 22);
+		panel.add(textArea);
 		
-		JLabel lblMessage = new JLabel("Message: ");
-		lblMessage.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
-		lblMessage.setBounds(35, 103, 167, 13);
-		frame.getContentPane().add(lblMessage);
+		JLabel lblMessage = new JLabel("Message:");
+		lblMessage.setBounds(4, 57, 46, 14);
+		panel.add(lblMessage);
 		
-		messageField = new JTextField();
-		messageField.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
-		subjectField.setBounds(147, 100, 198, 19);
-		frame.getContentPane().add(messageField);
-		messageField.setColumns(10);
+		JTextArea textArea_1 = new JTextArea();
+		textArea_1.setBounds(60, 55, 364, 176);
+		panel.add(textArea_1);
 		
-		send = new JButton("Send");
-		send.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
-		send.setBounds(162, 154, 85, 21);
-		frame.getContentPane().add(send);
-		
-	}
-	
-	public JButton getButton()
-	{
-		return send;
-	}
-	
-	public String getSubject()
-	{
-		return subjectField.getText();
-	}
-	
-	public String getMessage(){
-		return messageField.getText();
-	}
-	public JFrame getFrame()
-	{
-		return frame;
+		JButton btnNewButton = new JButton("Send");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton.setBounds(195, 238, 89, 23);
+		panel.add(btnNewButton);
 	}
 }

@@ -24,6 +24,7 @@ public class Client {
 			out = new ObjectOutputStream(accessSock.getOutputStream());
 			in = new ObjectInputStream(accessSock.getInputStream());
 		} catch(IOException e) {
+			System.out.println("2");
 		}
 	}
 	

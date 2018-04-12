@@ -88,9 +88,8 @@ public class CourseItemListener implements ActionListener{
 	}
 	
 	public void emailStudents(){
-		
-		p.sendObject(c.getCourse());
-		p.sendObject("");
+		StudentEmailCreator emailWindow = new StudentEmailCreator();
+		CreateEmailListener listener = new CreateEmailListener(p, c, emailWindow);
 	}
 
 }
