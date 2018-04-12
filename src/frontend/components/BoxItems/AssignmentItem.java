@@ -24,7 +24,7 @@ public class AssignmentItem extends BoxItem{
 		viewSubmissions.addActionListener(listener);
 		viewSubmissions.setBackground(Color.black);
 		viewSubmissions.setForeground(Color.white);
-		viewSubmissions.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+		viewSubmissions.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 		
 		setActive = new JButton("Set Active");
 		setActive.addActionListener(listener);
@@ -33,7 +33,7 @@ public class AssignmentItem extends BoxItem{
 			setActive.setForeground(Color.white);
 		else
 			setActive.setForeground(Color.red);
-		setActive.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+		setActive.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 		
 		add(viewSubmissions);
 		add(setActive);
@@ -43,13 +43,13 @@ public class AssignmentItem extends BoxItem{
 			submit.addActionListener(listener);
 			submit.setBackground(Color.black);
 			submit.setForeground(Color.white);
-			submit.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+			submit.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 			
 			viewGrade = new JButton("View Grade");
 			viewGrade.addActionListener(listener);
 			viewGrade.setBackground(Color.black);
 			viewGrade.setForeground(Color.white);
-			viewGrade.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+			viewGrade.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 			
 			add(submit);
 			add(viewGrade);

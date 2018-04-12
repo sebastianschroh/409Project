@@ -46,13 +46,13 @@ public class CourseItem extends BoxItem{
 		viewAssignments.addActionListener(listener);
 		viewAssignments.setBackground(Color.black);
 		viewAssignments.setForeground(Color.white);
-		viewAssignments.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+		viewAssignments.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 		add(viewAssignments);
 		
 		if(isProf == true){
 		active = new JButton("Set Active");
 		active.addActionListener(listener);
-		active.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+		active.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 		if(course.getStatus() == true)
 			active.setForeground(Color.white);
 		else
@@ -63,25 +63,25 @@ public class CourseItem extends BoxItem{
 		viewStudents.addActionListener(listener);
 		viewStudents.setBackground(Color.black);
 		viewStudents.setForeground(Color.white);
-		viewStudents.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+		viewStudents.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 		
 		addStudents = new JButton("Add Students");
 		addStudents.addActionListener(listener);
 		addStudents.setBackground(Color.black);
 		addStudents.setForeground(Color.white);
-		addStudents.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+		addStudents.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 		
 		addAssignment = new JButton("Add Assignment");
 		addAssignment.addActionListener(listener);
 		addAssignment.setBackground(Color.black);
 		addAssignment.setForeground(Color.white);
-		addAssignment.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+		addAssignment.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 		
 		emailStudents = new JButton("Email Students");
 		emailStudents.addActionListener(listener);
 		emailStudents.setBackground(Color.black);
 		emailStudents.setForeground(Color.white);
-		emailStudents.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+		emailStudents.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 		
 		add(emailStudents);
 		add(addAssignment);
@@ -94,7 +94,7 @@ public class CourseItem extends BoxItem{
 			emailProf.addActionListener(listener);
 			emailProf.setBackground(Color.black);
 			emailProf.setForeground(Color.white);
-			emailProf.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+			emailProf.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 			add(emailProf);
 		}
 		
@@ -127,14 +127,29 @@ public class CourseItem extends BoxItem{
 		return viewStudents;
 	}
 	
+	public JButton getAddStudents()
+	{
+		return addStudents;
+	}
+	
 	public ArrayList<Student> getStudentList()
 	{
 		return students;
 	}
 	
+	public void setStudentList(ArrayList<Student> s)
+	{
+		students = s;
+	}
+	
 	public ArrayList<Assignment> getAssignmentList()
 	{
 		return assignments;
+	}
+	
+	public void setAssignmentList(ArrayList<Assignment> a)
+	{
+		assignments = a;
 	}
 
 	public JButton getEmailStudents(){

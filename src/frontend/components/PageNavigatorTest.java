@@ -88,7 +88,8 @@ public class PageNavigatorTest {
 		panel_1.add(lblDesirelearn, BorderLayout.WEST);
 		
 		lblWelcome = new JLabel("Welcome:");
-		lblWelcome.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+		lblWelcome.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+		lblWelcome.setForeground(Color.white);
 		lblWelcome.setVerticalAlignment(SwingConstants.BOTTOM);
 		panel_1.add(lblWelcome, BorderLayout.EAST);
 		
@@ -106,13 +107,13 @@ public class PageNavigatorTest {
 			btnAddCourse = new JButton("Add course");
 			btnAddCourse.setForeground(Color.WHITE);
 			btnAddCourse.setBackground(Color.ORANGE);
-			btnAddCourse.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+			btnAddCourse.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 			panel.add(btnAddCourse);
 		}
 		btnViewCourse = new JButton("View Courses");
 		btnViewCourse.setForeground(Color.WHITE);
 		btnViewCourse.setBackground(Color.ORANGE);
-		btnViewCourse.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
+		btnViewCourse.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 		panel.add(btnViewCourse);
 		
 		scrollPane = new JScrollPane();
