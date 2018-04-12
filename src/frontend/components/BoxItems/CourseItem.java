@@ -28,16 +28,22 @@ public class CourseItem extends BoxItem{
 		super(c.getName());
 		
 		course = c;
-		
+
 		p.sendObject(course);
 		p.sendObject("getstudents");
-		
+
 		students = (ArrayList<Student>) p.readObject();
 		
 		p.sendObject(course);
 		p.sendObject("getassignments");
 		
 		assignments = (ArrayList<Assignment>) p.readObject();
+		
+//		p.sendObject(course);
+//		p.sendObject("getemails");
+
+//		emails = (ArrayList<String>) p.readObject();
+		
 		
 		listener = new CourseItemListener(this, p);
 		viewAssignments= new JButton("View Assignments");
@@ -95,19 +101,6 @@ public class CourseItem extends BoxItem{
 			emailProf.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 			add(emailProf);
 		}
-
-		
-		p.sendObject(course);
-		p.sendObject("getstudents");
-		
-		students = (ArrayList<Student>) p.readObject();
-		
-		p.sendObject(course);
-		p.sendObject("getemails");
-		
-		emails = (ArrayList<String>) p.readObject();
-
-
 	}
 	public Course getCourse() {
 		return course;

@@ -12,7 +12,6 @@ import frontend.components.*;
 public class StudentItem extends BoxItem{
 	
 	private StudentItemListener listener;
-	private CourseItem c;
 	private JButton enroll, unenroll;
 	private Student student;
 	

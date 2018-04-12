@@ -92,6 +92,15 @@ public class Worker implements Runnable {
 						sendObject(database.browseCourses(student.getId()));
 					}
 				}
+				if(input instanceof Assignment)
+				{
+					Assignment assign = (Assignment) input;
+					String s = (String) in.readObject();
+					if(s.contains("setactive"))
+					{
+						sendObject(database.setActive(assign));
+					}
+				}
 
 			} catch (ClassNotFoundException e) {
 				

@@ -22,7 +22,7 @@ public class DatabaseHelper {
 
 	
 	public DatabaseHelper() throws SQLException{
-		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/termproject?autoReconnect=true&useSSL=false", "root", "password");
+		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/termproject?autoReconnect=true&useSSL=false", "root", "passwordlmao");
 		connection.setAutoCommit(false);
 	}
 	
@@ -241,12 +241,13 @@ public class DatabaseHelper {
 
 	public Assignment setActive(Assignment a){
 		try {
+			boolean b = !a.getStatus();
 			prepareStatement("UPDATE termproject.assignment SET active = ? WHERE id = ?");
-			getStatement().setBoolean(1,  !a.getStatus());
+			getStatement().setBoolean(1,  b);
 			getStatement().setInt(2, a.getID());
 			getStatement().executeUpdate();
 			getConnection().commit();
-			a.setActive(!a.getStatus());
+			a.setActive(b);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
