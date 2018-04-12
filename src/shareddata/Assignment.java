@@ -12,12 +12,12 @@ public class Assignment implements Serializable{
 	private boolean active;
 	private String due_date;
 	
-	public Assignment(int id, int course_id, String title, String path, String due_date){
+	public Assignment(int id, int course_id, String title, String path, boolean active, String due_date){
 		this.id = id;
 		this.course_id = course_id;
 		this.title = title;
 		this.path = path;
-		active = true;
+		this.active = active;
 		this.due_date = due_date;
 	}
 	
