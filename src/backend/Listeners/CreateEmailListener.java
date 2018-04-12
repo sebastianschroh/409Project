@@ -17,6 +17,7 @@ public class CreateEmailListener implements ActionListener {
 	private CourseItem c;
 	private StudentEmailCreator e;
 	private PageNavigatorTest p;
+	
 	public CreateEmailListener(PageNavigatorTest p, CourseItem c, StudentEmailCreator e)
 	{
 		this.c = c;

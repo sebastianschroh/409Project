@@ -88,4 +88,7 @@ public class StudentEmailCreator {
 	public String getMessage(){
 		return messageArea.getText();
 	}
+	public JFrame getFrame(){
+		return frame;
+	}
 }
