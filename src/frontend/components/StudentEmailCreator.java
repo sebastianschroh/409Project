@@ -43,6 +43,7 @@ public class StudentEmailCreator {
 	 */
 	public StudentEmailCreator() {
 		initialize();
+		frame.setVisible(true);
 	}
 
 	/**
