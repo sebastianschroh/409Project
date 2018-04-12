@@ -22,7 +22,7 @@ public class DatabaseHelper {
 
 	
 	public DatabaseHelper() throws SQLException{
-		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/termproject?autoReconnect=true&useSSL=false", "root", "passwordlmao");
+		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/termproject?autoReconnect=true&useSSL=false", "root", "password");
 		connection.setAutoCommit(false);
 	}
 	
@@ -238,7 +238,7 @@ public class DatabaseHelper {
 		}
 	}
 	
-	public void setActive(Assignment a, boolean b){		
+	public Assignment setActive(Assignment a, boolean b){		
 		try {
 			prepareStatement("UPDATE termproject.assignment SET active = ? WHERE id = ?");
 			getStatement().setBoolean(1,  b);
@@ -246,9 +246,11 @@ public class DatabaseHelper {
 			
 			getStatement().executeUpdate();
 			getConnection().commit();
+			a.setActive(b);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return a;
 	}
 	
 	public void checkPassword(LoginInfo l){
@@ -302,6 +304,32 @@ public class DatabaseHelper {
 			
 			while(rs.next()){
 				list.add(new Assignment(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getBoolean(5), rs.getString(6)));
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<String> getStudentEmails(Course c){
+		ArrayList<String> list = new ArrayList<String>();
+		
+		try{
+			prepareStatement("SELECT * FROM termproject.studentenrollment WHERE course_id = ?");
+			getStatement().setInt(1,  c.getID());
+			
+			ResultSet rs = getStatement().executeQuery();
+			getConnection().commit();
+			
+			while(rs.next()){
+				prepareStatement("SELECT * FROM termproject.user WHERE id = ?");
+				getStatement().setInt(1,  rs.getInt(1));
+				
+				ResultSet rs2 = getStatement().executeQuery();
+				getConnection().commit();
+				if(rs2.next())
+					list.add(rs2.getString(3));
 			}
 		}
 		catch(SQLException e){
