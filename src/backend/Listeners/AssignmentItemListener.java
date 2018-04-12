@@ -41,9 +41,13 @@ public class AssignmentItemListener implements ActionListener{
 		{
 			a.getSetActive().setForeground(Color.white);
 		}
-		else
+		else if(assign.getStatus() == false)
 		{
 			a.getSetActive().setForeground(Color.red);
+		}
+		else
+		{
+			System.out.println("lol");
 		}
 	}
 }
