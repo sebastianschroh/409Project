@@ -24,9 +24,14 @@ public class CourseItemListener implements ActionListener{
 		{
 			activate();
 		}
+
 		if(e.getSource() == c.getViewStudents())
 		{
 			viewStudents();
+		}
+		if(e.getSource() == c.getEmailStudents()){
+			emailStudents();
+
 		}
 	}
 
@@ -48,6 +53,7 @@ public class CourseItemListener implements ActionListener{
 		}
 	}
 	
+
 	public void viewStudents()
 	{
 		p.setHoldPanel(p.getHoldPanel());
@@ -60,6 +66,11 @@ public class CourseItemListener implements ActionListener{
 		
 		p.getHoldPanel().revalidate();
 		p.getHoldPanel().repaint();
+	}
+	public void emailStudents(){
+		
+		p.sendObject(c.getCourse());
+		p.sendObject("");
 	}
 
 }

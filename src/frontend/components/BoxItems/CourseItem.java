@@ -114,4 +114,9 @@ public class CourseItem extends BoxItem{
 	{
 		return students;
 	}
+
+	public JButton getEmailStudents(){
+		return emailStudents;
+	}
+
 }

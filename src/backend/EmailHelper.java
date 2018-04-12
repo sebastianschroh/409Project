@@ -12,7 +12,7 @@ import javax.mail.internet.MimeMessage;
 
 public class EmailHelper {
 	
-	public EmailHelper(){
+	public EmailHelper(String address, String subject, String content){
 		Properties properties = new Properties();
 		properties.put("mail.smtp.starttls.enable",  "true");
 		properties.put("mail.smtp.auth",  "true");
@@ -28,9 +28,9 @@ public class EmailHelper {
 		try{
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("zach.md.sims97@gmail.com"));
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress("milolika.smol@gmail.com"));
-			message.setSubject("hey there");
-			message.setText("your mom gay");
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(address));
+			message.setSubject(subject);
+			message.setText(content);
 			
 			Transport.send(message);
 		}

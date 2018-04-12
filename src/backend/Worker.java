@@ -45,6 +45,10 @@ public class Worker implements Runnable {
 					{
 						sendObject(database.addCourse(course));
 					}
+					else if(s.contains("get"))
+					{
+					
+					}
 				}
 				if(input instanceof LoginInfo)
 				{
