@@ -18,6 +18,7 @@ public class CourseItemListener implements ActionListener{
 		this.c = c;
 		this.p = p;
 	}
+	
 	public void actionPerformed(ActionEvent e) {
 		
 		if(e.getSource() == c.getActive())
@@ -58,7 +59,7 @@ public class CourseItemListener implements ActionListener{
 	{
 		p.setHoldPanel(p.getHoldPanel());
 		p.getHoldPanel().removeAll();
-		for(int i = 0; i < p.getCourseList().size(); i++)
+		for(int i = 0; i < c.getStudentList().size(); i++)
 		{
 			StudentItem temp = new StudentItem(c.getStudentList().get(i),this.p,'u');
 			p.getHoldPanel().add(temp);
@@ -67,6 +68,7 @@ public class CourseItemListener implements ActionListener{
 		p.getHoldPanel().revalidate();
 		p.getHoldPanel().repaint();
 	}
+	
 	public void emailStudents(){
 		
 		p.sendObject(c.getCourse());
