@@ -22,7 +22,7 @@ public class DatabaseHelper {
 
 	
 	public DatabaseHelper() throws SQLException{
-		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/termproject?autoReconnect=true&useSSL=false", "root", "passwordlmao");
+		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/termproject?autoReconnect=true&useSSL=false", "root", "password");
 		connection.setAutoCommit(false);
 	}
 	
@@ -206,6 +206,14 @@ public class DatabaseHelper {
 	public void addEnrollment(StudentEnrollment e){
 		
 		try {
+			prepareStatement("SELECT id FROM termproject.studentenrollment WHERE student_id = ? AND course_id = ?");
+			getStatement().setInt(1,  e.getStudentID());
+			getStatement().setInt(2,  e.getCourseID());
+			
+			ResultSet rs = getStatement().executeQuery();
+			getConnection().commit();
+			
+			if(!rs.next()){
 			prepareStatement("INSERT INTO termproject.studentenrollment (student_id, course_id) VALUES(?, ?)");
 			getStatement().setInt(1,  e.getStudentID());
 			getStatement().setInt(2, e.getCourseID());
@@ -217,11 +225,12 @@ public class DatabaseHelper {
 			getStatement().setInt(1,  e.getStudentID());
 			getStatement().setInt(2,  e.getCourseID());
 			
-			ResultSet rs = getStatement().executeQuery();
+			ResultSet rs2 = getStatement().executeQuery();
 			getConnection().commit();
 			
-			if(rs.next())
-			e.setId(rs.getInt(1));
+			if(rs2.next())
+			e.setId(rs2.getInt(1));
+			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}		
@@ -230,8 +239,9 @@ public class DatabaseHelper {
 	public void unenroll(StudentEnrollment e){
 		
 		try {
-			prepareStatement("DELETE FROM termproject.studentenrollment WHERE id = ?");
-			getStatement().setInt(1,  e.getId());
+			prepareStatement("DELETE FROM termproject.studentenrollment WHERE student_id = ? AND course_id = ?");
+			getStatement().setInt(1,  e.getStudentID());
+			getStatement().setInt(2,  e.getCourseID());
 			
 			getStatement().executeUpdate();
 			getConnection().commit();
