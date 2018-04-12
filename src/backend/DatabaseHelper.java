@@ -238,15 +238,15 @@ public class DatabaseHelper {
 		}
 	}
 	
-	public Assignment setActive(Assignment a, boolean b){		
+
+	public Assignment setActive(Assignment a){
 		try {
 			prepareStatement("UPDATE termproject.assignment SET active = ? WHERE id = ?");
-			getStatement().setBoolean(1,  b);
+			getStatement().setBoolean(1,  !a.getStatus());
 			getStatement().setInt(2, a.getID());
-			
 			getStatement().executeUpdate();
 			getConnection().commit();
-			a.setActive(b);
+			a.setActive(!a.getStatus());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

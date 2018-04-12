@@ -20,14 +20,24 @@ public class CourseItem extends BoxItem{
 	private ArrayList<Student> students;
 	private ArrayList<String> emails;
 	
+	private ArrayList<Assignment> assignments;
+	
+	@SuppressWarnings("unchecked")
 	public CourseItem(Course c, PageNavigatorTest p, boolean isProf) {
 		
 		super(c.getName());
 		
 		course = c;
+		
 		p.sendObject(course);
 		p.sendObject("getstudents");
+		
 		students = (ArrayList<Student>) p.readObject();
+		
+		p.sendObject(course);
+		p.sendObject("getassignments");
+		
+		assignments = (ArrayList<Assignment>) p.readObject();
 		
 		listener = new CourseItemListener(this, p);
 		viewAssignments= new JButton("View Assignments");
@@ -124,6 +134,11 @@ public class CourseItem extends BoxItem{
 	public ArrayList<Student> getStudentList()
 	{
 		return students;
+	}
+	
+	public ArrayList<Assignment> getAssignmentList()
+	{
+		return assignments;
 	}
 
 	public JButton getEmailStudents(){

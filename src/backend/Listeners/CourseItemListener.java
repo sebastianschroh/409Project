@@ -34,6 +34,10 @@ public class CourseItemListener implements ActionListener{
 			emailStudents();
 
 		}
+		if(e.getSource() == c.getViewAssignments())
+		{
+			viewAssignments();
+		}
 	}
 
 	
@@ -61,7 +65,21 @@ public class CourseItemListener implements ActionListener{
 		p.getHoldPanel().removeAll();
 		for(int i = 0; i < c.getStudentList().size(); i++)
 		{
-			StudentItem temp = new StudentItem(c.getStudentList().get(i),this.p,'u');
+			StudentItem temp = new StudentItem(c.getStudentList().get(i),this.p,this.c,'u');
+			p.getHoldPanel().add(temp);
+		}
+		
+		p.getHoldPanel().revalidate();
+		p.getHoldPanel().repaint();
+	}
+	
+	public void viewAssignments()
+	{
+		p.setHoldPanel(p.getHoldPanel());
+		p.getHoldPanel().removeAll();
+		for(int i = 0; i < c.getAssignmentList().size(); i++)
+		{
+			AssignmentItem temp = new AssignmentItem(c.getAssignmentList().get(i),this.p.isProf());
 			p.getHoldPanel().add(temp);
 		}
 		
