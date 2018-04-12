@@ -27,6 +27,10 @@ public class CourseItemListener implements ActionListener{
 //		{
 //			view();
 //		}
+		
+		if(e.getSource() == c.getEmailStudents()){
+			emailStudents();
+		}
 	}
 
 	
@@ -45,6 +49,12 @@ public class CourseItemListener implements ActionListener{
 		{
 			c.getActive().setForeground(Color.red);
 		}
+	}
+	
+	public void emailStudents(){
+		
+		p.sendObject(c.getCourse());
+		p.sendObject(");
 	}
 
 }

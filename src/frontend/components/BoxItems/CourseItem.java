@@ -96,5 +96,8 @@ public class CourseItem extends BoxItem{
 	{
 		return viewAssignments;
 	}
+	public JButton getEmailStudents(){
+		return emailStudents;
+	}
 
 }

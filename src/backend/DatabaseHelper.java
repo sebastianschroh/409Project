@@ -269,4 +269,24 @@ public class DatabaseHelper {
 		}
 		
 	}
+	
+	public ArrayList<Student> getStudentsEnrolled(Course c){
+		ArrayList<Student> list = new ArrayList<Student>();
+		
+		try{
+			prepareStatement("SELECT * FROM termproject.studentenrollment WHERE course_id = ?");
+			getStatement().setInt(1,  c.getID());
+			
+			ResultSet rs = getStatement().executeQuery();
+			getConnection().commit();
+			
+			while(rs.next()){
+				list.add((Student) searchUserID(rs.getInt(2)));
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return list;
+	}
 }
