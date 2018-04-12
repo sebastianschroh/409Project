@@ -238,10 +238,10 @@ public class DatabaseHelper {
 		}
 	}
 	
-	public void setActive(Assignment a, boolean b){		
+	public void setActive(Assignment a){		
 		try {
 			prepareStatement("UPDATE termproject.assignment SET active = ? WHERE id = ?");
-			getStatement().setBoolean(1,  b);
+			getStatement().setBoolean(1,  a.getStatus());
 			getStatement().setInt(2, a.getID());
 			
 			getStatement().executeUpdate();
