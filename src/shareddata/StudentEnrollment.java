@@ -8,13 +8,10 @@ public class StudentEnrollment implements Serializable{
 	private int id;
 	private int student_id;
 	private int course_id;
-	private boolean enrolling;
 	
-	public StudentEnrollment(int id, int sid, int cid){
-		this.id = id;
+	public StudentEnrollment(int sid, int cid){
 		student_id = sid;
 		course_id = cid;
-		enrolling = true;
 	}
 	
 	public void setId(int i){
@@ -29,10 +26,6 @@ public class StudentEnrollment implements Serializable{
 		course_id = i;
 	}
 	
-	public void setEnrollment(boolean b){
-		enrolling = b;
-	}
-	
 	public int getId(){
 		return id;
 	}
@@ -45,7 +38,4 @@ public class StudentEnrollment implements Serializable{
 		return course_id;
 	}
 	
-	public boolean getEnrollment(){
-		return enrolling;
-	}
 }
