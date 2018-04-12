@@ -109,6 +109,19 @@ public class Worker implements Runnable {
 						new EmailHelper(email.getRecipients().get(i), email.getSubject(), email.getContent());
 					}
 				}
+				if(input instanceof StudentEnrollment)
+				{
+					StudentEnrollment studen = (StudentEnrollment) input;
+					String s = (String) in.readObject();
+					if(s.contains("unenroll"))
+					{
+						database.unenroll(studen);
+					}
+					else
+					{
+						database.addEnrollment(studen);
+					}
+				}
 
 			}catch (ClassNotFoundException e) {
 				

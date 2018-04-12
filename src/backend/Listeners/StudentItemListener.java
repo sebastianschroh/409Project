@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import frontend.components.BoxItems.*;
 import frontend.components.*;
+import shareddata.*;
 
 public class StudentItemListener implements ActionListener{
 	
@@ -22,8 +23,15 @@ public class StudentItemListener implements ActionListener{
 		
 		if(e.getSource() == s.getUnenroll())
 		{
-			
+			unenroll();
 		}
+	}
+	
+	public void unenroll()
+	{
+		StudentEnrollment s = new StudentEnrollment(this.s.getStudent().getId(), c.getCourse().getID());
+		p.sendObject(s);
+		p.sendObject("unenroll");
 	}
 
 }
