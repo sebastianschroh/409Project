@@ -1,9 +1,11 @@
 package backend.Listeners;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import frontend.components.*;
 import frontend.components.BoxItems.*;
+import shareddata.Assignment;
 
 public class AssignmentItemListener implements ActionListener{
 	
@@ -22,6 +24,30 @@ public class AssignmentItemListener implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e){
 		
-		if(a.getSource() == a.get)
+		if(e.getSource() == a.getSetActive())
+		{
+			setActivity();
+		}
+	}
+	
+	public void setActivity()
+	{
+		p.sendObject(a.getAssignment());
+		p.sendObject("setactive");
+		Assignment assign = null;
+		assign = (Assignment) p.readObject();
+		a.getAssignment().setActive(assign.getStatus());
+		if(assign.getStatus() == true)
+		{
+			a.getSetActive().setForeground(Color.white);
+		}
+		else if(assign.getStatus() == false)
+		{
+			a.getSetActive().setForeground(Color.red);
+		}
+		else
+		{
+			System.out.println("lol");
+		}
 	}
 }

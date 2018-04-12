@@ -6,6 +6,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 
 import backend.Listeners.AssignmentItemListener;
+import frontend.components.PageNavigatorTest;
 import shareddata.Assignment;
 
 public class AssignmentItem extends BoxItem{
@@ -13,11 +14,11 @@ public class AssignmentItem extends BoxItem{
 	private AssignmentItemListener listener;
 	private Assignment assignment;
 	
-	public AssignmentItem(Assignment a, boolean isProf){
+	public AssignmentItem(Assignment a, PageNavigatorTest p, CourseItem c){
 		super(a.getTitle());
-		listener = new AssignmentItemListener();
+		listener = new AssignmentItemListener(this,c,p);
 		assignment = a;
-		if(isProf){
+		if(p.isProf()){
 			
 		viewSubmissions = new JButton("View Submissions");
 		viewSubmissions.addActionListener(listener);
@@ -28,7 +29,10 @@ public class AssignmentItem extends BoxItem{
 		setActive = new JButton("Set Active");
 		setActive.addActionListener(listener);
 		setActive.setBackground(Color.black);
-		setActive.setForeground(Color.white);
+		if(assignment.getStatus() == true)
+			setActive.setForeground(Color.white);
+		else
+			setActive.setForeground(Color.red);
 		setActive.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 		
 		add(viewSubmissions);

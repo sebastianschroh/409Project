@@ -79,7 +79,7 @@ public class CourseItemListener implements ActionListener{
 		p.getHoldPanel().removeAll();
 		for(int i = 0; i < c.getAssignmentList().size(); i++)
 		{
-			AssignmentItem temp = new AssignmentItem(c.getAssignmentList().get(i),this.p.isProf());
+			AssignmentItem temp = new AssignmentItem(c.getAssignmentList().get(i),this.p, this.c);
 			p.getHoldPanel().add(temp);
 		}
 		

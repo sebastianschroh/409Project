@@ -22,7 +22,7 @@ public class DatabaseHelper {
 
 	
 	public DatabaseHelper() throws SQLException{
-		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/termproject?autoReconnect=true&useSSL=false", "root", "password");
+		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/termproject?autoReconnect=true&useSSL=false", "root", "passwordlmao");
 		connection.setAutoCommit(false);
 	}
 	
@@ -145,6 +145,35 @@ public class DatabaseHelper {
 		return r;
 	}
 	
+	public Assignment setActive(Assignment a){
+		Assignment assign = new Assignment(a.getID(), a.getCourseID(),a.getTitle(),a.getPath(),false,a.getDueDate());
+		try {
+	
+			boolean b = false;
+			prepareStatement("SELECT active FROM termproject.assignment WHERE id = ?");
+			getStatement().setInt(1, a.getID());
+			
+			ResultSet rs = getStatement().executeQuery();
+			getConnection().commit();
+			
+			if(rs.next())
+				b=rs.getBoolean(1);
+			assign = new Assignment(a.getID(), a.getCourseID(),a.getTitle(),a.getPath(),b,a.getDueDate());
+			assign.setActive(!b);
+			prepareStatement("UPDATE termproject.assignment SET active = ? WHERE id = ?");
+			if(b)
+				getStatement().setBoolean(1,  false);
+			else
+				getStatement().setBoolean(1,  true);
+			getStatement().setInt(2, a.getID());
+			getStatement().executeUpdate();
+			getConnection().commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return assign;
+	}
+	
 	public Course setActive(Course c){
 		Course course = new Course(0,0,null,false);
 		try {
@@ -237,22 +266,7 @@ public class DatabaseHelper {
 			ex.printStackTrace();
 		}
 	}
-	
-
-	public Assignment setActive(Assignment a){
-		try {
-			prepareStatement("UPDATE termproject.assignment SET active = ? WHERE id = ?");
-			getStatement().setBoolean(1,  !a.getStatus());
-			getStatement().setInt(2, a.getID());
-			getStatement().executeUpdate();
-			getConnection().commit();
-			a.setActive(!a.getStatus());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return a;
-	}
-	
+		
 	public void checkPassword(LoginInfo l){
 		
 		try {

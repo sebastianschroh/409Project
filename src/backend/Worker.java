@@ -92,6 +92,17 @@ public class Worker implements Runnable {
 						sendObject(database.browseCourses(student.getId()));
 					}
 				}
+
+				if(input instanceof Assignment)
+				{
+					Assignment assign = (Assignment) input;
+					String s = (String) in.readObject();
+					if(s.contains("setactive"))
+					{
+						sendObject(database.setActive(assign));
+					}
+				}
+
 				if(input instanceof Email){
 					Email email = (Email) input;
 					for(int i = 0; i < email.getRecipients().size(); i ++){
@@ -99,7 +110,7 @@ public class Worker implements Runnable {
 					}
 				}
 
-			} catch (ClassNotFoundException e) {
+			}catch (ClassNotFoundException e) {
 				
 				e.printStackTrace();
 			} catch (IOException e) {
