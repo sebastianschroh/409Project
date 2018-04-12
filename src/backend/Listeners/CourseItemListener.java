@@ -32,7 +32,6 @@ public class CourseItemListener implements ActionListener{
 		}
 		if(e.getSource() == c.getEmailStudents()){
 			emailStudents();
-
 		}
 		if(e.getSource() == c.getViewAssignments())
 		{
