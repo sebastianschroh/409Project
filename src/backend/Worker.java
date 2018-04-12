@@ -88,6 +88,12 @@ public class Worker implements Runnable {
 						sendObject(database.browseCourses(student.getId()));
 					}
 				}
+				if(input instanceof Email){
+					Email email = (Email) input;
+					for(int i = 0; i < email.getRecipients().size(); i ++){
+						EmailHelper helper = new EmailHelper(email.getRecipients().get(i), email.getSubject(), email.getContent());
+					}
+				}
 
 			} catch (ClassNotFoundException e) {
 				

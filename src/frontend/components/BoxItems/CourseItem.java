@@ -96,8 +96,6 @@ public class CourseItem extends BoxItem{
 		p.sendObject("getemails");
 		
 		emails = (ArrayList<String>) p.readObject();
-
-
 	}
 	public Course getCourse() {
 		return course;
