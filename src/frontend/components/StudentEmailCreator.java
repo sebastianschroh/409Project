@@ -8,7 +8,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class EmailCreator {
+public class StudentEmailCreator {
 
 	private JFrame frame;
 	private JTextField subjectField;
@@ -18,7 +18,7 @@ public class EmailCreator {
 	/**
 	 * Create the application.
 	 */
-	public EmailCreator() {
+	public StudentEmailCreator() {
 		initialize();
 		frame.setVisible(true);
 	}

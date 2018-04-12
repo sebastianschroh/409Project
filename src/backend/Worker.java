@@ -45,6 +45,11 @@ public class Worker implements Runnable {
 					{
 						sendObject(database.addCourse(course));
 					}
+
+					else if(s.contains("getmails"))
+					{
+						sendObject(database.getStudentEmails(course));
+					}
 					else if(s.contains("getstudents"))
 					{
 						sendObject(database.getStudentsEnrolled(course));

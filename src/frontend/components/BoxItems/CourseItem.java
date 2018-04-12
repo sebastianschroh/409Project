@@ -18,6 +18,7 @@ public class CourseItem extends BoxItem{
 	private CourseItemListener listener;
 	
 	private ArrayList<Student> students;
+	private ArrayList<String> emails;
 	
 	private ArrayList<Assignment> assignments;
 	
@@ -95,6 +96,18 @@ public class CourseItem extends BoxItem{
 			add(emailProf);
 		}
 
+		
+		p.sendObject(course);
+		p.sendObject("getstudents");
+		
+		students = (ArrayList<Student>) p.readObject();
+		
+		p.sendObject(course);
+		p.sendObject("getemails");
+		
+		emails = (ArrayList<String>) p.readObject();
+
+
 	}
 	public Course getCourse() {
 		return course;
@@ -132,6 +145,10 @@ public class CourseItem extends BoxItem{
 
 	public JButton getEmailStudents(){
 		return emailStudents;
+	}
+	
+	public ArrayList<String> getEmails(){
+		return emails;
 	}
 
 }
