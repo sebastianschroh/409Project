@@ -2,12 +2,13 @@ package frontend.components.BoxItems;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 
 import backend.Listeners.CourseItemListener;
 import frontend.components.PageNavigatorTest;
-import shareddata.Course;
+import shareddata.*;
 
 @SuppressWarnings("serial")
 public class CourseItem extends BoxItem{
@@ -15,6 +16,8 @@ public class CourseItem extends BoxItem{
 	private Course course;
 	private JButton active, viewStudents, addStudents, viewAssignments, addAssignment, emailStudents, emailProf;
 	private CourseItemListener listener;
+	
+	private ArrayList<Student> students;
 	
 	public CourseItem(Course c, PageNavigatorTest p, boolean isProf) {
 		
@@ -76,6 +79,11 @@ public class CourseItem extends BoxItem{
 			emailProf.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
 			add(emailProf);
 		}
+		
+		p.sendObject(course);
+		p.sendObject("getstudents");
+		
+		students = (ArrayList<Student>) p.readObject();
 
 	}
 	public Course getCourse() {
@@ -96,5 +104,14 @@ public class CourseItem extends BoxItem{
 	{
 		return viewAssignments;
 	}
-
+	
+	public JButton getViewStudents()
+	{
+		return viewStudents;
+	}
+	
+	public ArrayList<Student> getStudentList()
+	{
+		return students;
+	}
 }

@@ -4,6 +4,7 @@ import javax.swing.JButton;
 
 import backend.Listeners.StudentItemListener;
 import shareddata.Student;
+import frontend.components.*;
 
 public class StudentItem extends BoxItem{
 	
@@ -11,7 +12,7 @@ public class StudentItem extends BoxItem{
 	private JButton enroll, unenroll;
 	private Student student;
 	
-	public StudentItem(Student s, char c){
+	public StudentItem(Student s, PageNavigatorTest p, char c){
 		super(s.getFirstName());
 		student = s;
 		listener = new StudentItemListener();

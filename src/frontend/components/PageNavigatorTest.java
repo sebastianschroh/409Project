@@ -129,7 +129,7 @@ public class PageNavigatorTest {
 		sendObject("getcourses");
 		
 		course = (ArrayList<Course>) readObject();
-	
+		
 		frame.setVisible(true);
 	}
 	

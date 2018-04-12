@@ -50,7 +50,7 @@ public class DatabaseHelper {
 			
 			if(rs.next() && rs.getString(6).charAt(0) == 'S')
 				 user = new Student(rs.getInt(1), rs.getString(4), rs.getString(5));
-			else if (rs.getString(6).charAt(0) == 'p')
+			else if (rs.getString(6).charAt(0) == 'P')
 				user = new Professor(rs.getInt(1), rs.getString(4), rs.getString(5));	
 			
 		} catch (SQLException e) {

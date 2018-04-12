@@ -3,8 +3,9 @@ package backend.Listeners;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import frontend.components.BoxItems.CourseItem;
 import frontend.components.PageNavigatorTest;
+import frontend.components.*;
+import frontend.components.BoxItems.*;
 import shareddata.Course;
 
 public class CourseItemListener implements ActionListener{
@@ -23,10 +24,10 @@ public class CourseItemListener implements ActionListener{
 		{
 			activate();
 		}
-//		if(e.getSource() == c.getView())
-//		{
-//			view();
-//		}
+		if(e.getSource() == c.getViewStudents())
+		{
+			viewStudents();
+		}
 	}
 
 	
@@ -45,6 +46,20 @@ public class CourseItemListener implements ActionListener{
 		{
 			c.getActive().setForeground(Color.red);
 		}
+	}
+	
+	public void viewStudents()
+	{
+		p.setHoldPanel(p.getHoldPanel());
+		p.getHoldPanel().removeAll();
+		for(int i = 0; i < p.getCourseList().size(); i++)
+		{
+			StudentItem temp = new StudentItem(c.getStudentList().get(i),this.p,'u');
+			p.getHoldPanel().add(temp);
+		}
+		
+		p.getHoldPanel().revalidate();
+		p.getHoldPanel().repaint();
 	}
 
 }
