@@ -64,6 +64,11 @@ public class SubmissionItem extends BoxItem{
 		return txtGrade.getText();
 	}
 	
+	public JLabel getGradeLabel()
+	{
+		return lblGrade;
+	}
+	
 	public void setGrade(String s)
 	{
 		lblGrade.setText(s +"%");

@@ -466,7 +466,7 @@ public class DatabaseHelper {
 			getStatement().setInt(3,  g.getCourseID());
 			getStatement().setInt(4,  g.getGrade());
 			
-			getStatement().executeQuery();
+			getStatement().executeUpdate();
 			getConnection().commit();
 			
 			prepareStatement("SELECT * FROM termproject.grade WHERE assign_id = ? AND student_id = ?");
@@ -483,7 +483,7 @@ public class DatabaseHelper {
 			getStatement().setInt(2,  g.getAssignID());
 			getStatement().setInt(3,  g.getStudentID());
 			
-			getStatement().executeQuery();
+			getStatement().executeUpdate();
 			getConnection().commit();
 		}
 		catch(SQLException e){

@@ -12,7 +12,7 @@ public class Grade implements Serializable{
 	private int grade;
 	
 	public Grade(int id,int assign_id, int student_id, int course_id, int grade){
-		student_id = id;
+		this.id = id;
 		this.grade = grade;
 		this.assign_id = assign_id;
 		this.student_id = student_id;
