@@ -70,8 +70,8 @@ public class StudentEmailCreator {
 	public JFrame getFrame(){
 		return frame;
 	}
-	public JButton getSend()
-	{
+
+	public JButton getButton() {
 		return sendButton;
 	}
 

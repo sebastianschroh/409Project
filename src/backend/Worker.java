@@ -114,7 +114,6 @@ public class Worker implements Runnable {
 					{
 						for(int i = 0; i < email.getRecipients().size(); i ++){
 							new EmailHelper(email.getRecipients().get(i), email.getSubject(), email.getContent());
-						}
 					}
 				}
 				

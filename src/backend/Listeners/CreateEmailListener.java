@@ -31,7 +31,6 @@ public class CreateEmailListener implements ActionListener {
 		ArrayList<String> list = c.getEmails();
 		Email email = new Email(null, list, subject, message);
 		p.sendObject(email);
-		p.sendObject("sendEmail");
 		
 		e.getFrame().dispose();
 	}

@@ -19,7 +19,7 @@ public class SendEmailListener implements ActionListener {
 	
 	public void actionPerformed(ActionEvent arg1)
 	{
-		StudentEmailCreator emailCreator = new StudentEmailCreator();
-		emailCreator.getButton().addActionListener(new CreateEmailListener(p,c, emailCreator));
+		StudentEmailCreator emailCreator = new StudentEmailCreator(p, c);
+		emailCreator.getButton().addActionListener(new CreateEmailListener(p, c, emailCreator));
 	}
 }
