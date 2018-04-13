@@ -482,4 +482,23 @@ public class DatabaseHelper {
 		}
 		return g;
 	}
+	
+	public Grade getGrade(Submission s){
+		Grade g = new Grade(0, 0, 0, 0, 0);
+		try{
+			prepareStatement("SELECT * FROM termproject.grade WHERE assign_id = ? AND student_id = ?");
+			getStatement().setInt(1, s.getAssignmentID());
+			getStatement().setInt(2, s.getStudentID());
+			
+			ResultSet rs = getStatement().executeQuery();
+			getConnection().commit();
+			
+			if(rs.next())
+				g = new Grade(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5));
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return g;
+	}
 }
