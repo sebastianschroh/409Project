@@ -46,7 +46,7 @@ public class Worker implements Runnable {
 						sendObject(database.addCourse(course));
 					}
 
-					else if(s.contains("getmails"))
+					else if(s.contains("getEmails"))
 					{
 						sendObject(database.getStudentEmails(course));
 					}
@@ -104,6 +104,10 @@ public class Worker implements Runnable {
 					if(s.contains("setactive"))
 					{
 						sendObject(database.setActive(assign));
+					}
+					if(s.contains("getsubmissions"))
+					{
+						//sendObject(database.getSubmissions(assign));
 					}
 				}
 

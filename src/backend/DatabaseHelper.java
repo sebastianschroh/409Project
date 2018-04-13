@@ -9,10 +9,12 @@ import java.util.ArrayList;
 
 import shareddata.Assignment;
 import shareddata.Course;
+import shareddata.Grade;
 import shareddata.LoginInfo;
 import shareddata.Professor;
 import shareddata.Student;
 import shareddata.StudentEnrollment;
+import shareddata.Submission;
 import shareddata.User;
 
 public class DatabaseHelper {
@@ -368,7 +370,7 @@ public class DatabaseHelper {
 			
 			while(rs.next()){
 				prepareStatement("SELECT * FROM termproject.user WHERE id = ?");
-				getStatement().setInt(1,  rs.getInt(1));
+				getStatement().setInt(1,  rs.getInt(2));
 				
 				ResultSet rs2 = getStatement().executeQuery();
 				getConnection().commit();
@@ -404,5 +406,34 @@ public class DatabaseHelper {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	public void addSubmission(Submission s){
+		
+		try {
+			prepareStatement("INSERT INTO termproject.submission (assign_id, student_id, path, title, submission_grade, comments, timestamp) VALUES(?, ?, ?, ?, ?, ?, ?)");
+			getStatement().setInt(1,  s.getAssignmentID());
+			getStatement().setInt(2, s.getStudentID());
+			getStatement().setString(3,  s.getPath());
+			getStatement().setString(4, s.getTitle());
+			getStatement().setInt(5, s.getGrade());
+			getStatement().setString(6,  s.getComment());
+			getStatement().setString(7,  s.getTimestamp());
+			
+			getStatement().executeUpdate();
+			getConnection().commit();
+			
+			prepareStatement("SELECT id FROM termproject.submission WHERE assign_id = ? AND student_id = ?");
+			getStatement().setInt(1,  s.getAssignmentID());
+			getStatement().setInt(2, s.getStudentID());
+			
+			ResultSet rs = getStatement().executeQuery();
+			getConnection().commit();
+			
+			if(rs.next())
+			s.setId(rs.getInt(1));
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
 	}
 }

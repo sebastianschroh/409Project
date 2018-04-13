@@ -40,19 +40,19 @@ public class StudentEmailCreator {
 		panel.setLayout(null);
 		
 		JLabel lblSubject = new JLabel("Subject:");
-		lblSubject.setBounds(10, 16, 40, 14);
+		lblSubject.setBounds(10, 16, 83, 14);
 		panel.add(lblSubject);
 		
 		subjectArea = new JTextArea();
-		subjectArea.setBounds(60, 11, 364, 22);
+		subjectArea.setBounds(122, 11, 302, 22);
 		panel.add(subjectArea);
 		
 		JLabel lblMessage = new JLabel("Message:");
-		lblMessage.setBounds(4, 57, 46, 14);
+		lblMessage.setBounds(4, 57, 89, 14);
 		panel.add(lblMessage);
 		
 		messageArea = new JTextArea();
-		messageArea.setBounds(60, 55, 364, 176);
+		messageArea.setBounds(122, 55, 302, 176);
 		panel.add(messageArea);
 		
 		sendButton= new JButton("Send");

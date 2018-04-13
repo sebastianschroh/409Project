@@ -36,8 +36,11 @@ public class CourseItem extends BoxItem{
 		p.sendObject("getassignments");
 		
 		assignments = (ArrayList<Assignment>) p.readObject();
-
 		
+		p.sendObject(course);
+		p.sendObject("getEmails");
+		
+		emails = (ArrayList<String>) p.readObject();
 		listener = new CourseItemListener(this, p);
 		viewAssignments= new JButton("View Assignments");
 		viewAssignments.addActionListener(listener);
