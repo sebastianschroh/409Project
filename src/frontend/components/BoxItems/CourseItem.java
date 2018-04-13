@@ -33,8 +33,14 @@ public class CourseItem extends BoxItem{
 		setEnrolledStudents();
 		
 		p.sendObject(course);
-		p.sendObject("getassignments");
-		
+		if(p.isProf())
+		{
+			p.sendObject("getassignments");
+		}
+		else
+		{
+			p.sendObject("getactiveassignments");
+		}
 		assignments = (ArrayList<Assignment>) p.readObject();
 		
 		p.sendObject(course);
@@ -146,6 +152,11 @@ public class CourseItem extends BoxItem{
 	public JButton getAddStudents()
 	{
 		return addStudents;
+	}
+	
+	public JButton getAddAssignment()
+	{
+		return addAssignment;
 	}
 	
 	public ArrayList<Student> getStudentList()

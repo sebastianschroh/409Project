@@ -41,8 +41,14 @@ public class CourseItemListener implements ActionListener{
 		{
 			addStudents();
 		}
+<<<<<<< HEAD
 		if(e.getSource() == c.getEmailProf()){
 			emailProf();
+=======
+		if(e.getSource() == c.getAddAssignment())
+		{
+			addAssignment();
+>>>>>>> 1c6ab4d805f77566ad71fae439681048abf4cd48
 		}
 	}
 
@@ -82,16 +88,18 @@ public class CourseItemListener implements ActionListener{
 	
 	public void viewAssignments()
 	{
-		p.setHoldPanel(p.getHoldPanel());
-		p.getHoldPanel().removeAll();
-		for(int i = 0; i < c.getAssignmentList().size(); i++)
-		{
-			AssignmentItem temp = new AssignmentItem(c.getAssignmentList().get(i),this.p, this.c);
-			p.getHoldPanel().add(temp);
-		}
 		
-		p.getHoldPanel().revalidate();
-		p.getHoldPanel().repaint();
+			p.setHoldPanel(p.getHoldPanel());
+			p.getHoldPanel().removeAll();
+			for(int i = 0; i < c.getAssignmentList().size(); i++)
+			{
+				AssignmentItem temp = new AssignmentItem(c.getAssignmentList().get(i),this.p, this.c);
+				p.getHoldPanel().add(temp);
+			}
+		
+			p.getHoldPanel().revalidate();
+			p.getHoldPanel().repaint();
+		
 	}
 	
 	public void emailStudents(){
@@ -114,6 +122,12 @@ public class CourseItemListener implements ActionListener{
 		
 		p.getHoldPanel().revalidate();
 		p.getHoldPanel().repaint();
+	}
+	
+	public void addAssignment()
+	{
+		AssignmentCreator assigncreator = new AssignmentCreator(c,p);
+		assigncreator.getButton().addActionListener(new CreateAssignmentListener(assigncreator, this.p, this.c));
 	}
 
 }

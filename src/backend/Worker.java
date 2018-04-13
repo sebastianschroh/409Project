@@ -65,6 +65,10 @@ public class Worker implements Runnable {
 					{
 						sendObject(database.getStudentsNotEnrolled(course));
 					}
+					else if(s.contains("getactiveassignments"))
+					{
+						sendObject(database.getActiveAssignments(course));
+					}
 				}
 				if(input instanceof LoginInfo)
 				{
@@ -111,6 +115,10 @@ public class Worker implements Runnable {
 					if(s.contains("getsubmissions"))
 					{
 						sendObject(database.getSubmissions(assign));
+					}
+					if(s.contains("addAssign"))
+					{
+						database.uploadAssign(assign);
 					}
 				}
 
