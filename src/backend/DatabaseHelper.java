@@ -474,8 +474,17 @@ public class DatabaseHelper {
 			getStatement().setInt(2,  g.getStudentID());
 			
 			ResultSet rs = getStatement().executeQuery();
+			getConnection().commit();
 			if(rs.next())
 				g.setID(rs.getInt(1));
+			
+			prepareStatement("UPDATE termproject.submission SET submission_grade = ? WHERE assign_id = ? AND student_id = ?");
+			getStatement().setInt(1,  g.getGrade());
+			getStatement().setInt(2,  g.getAssignID());
+			getStatement().setInt(3,  g.getStudentID());
+			
+			getStatement().executeQuery();
+			getConnection().commit();
 		}
 		catch(SQLException e){
 			e.printStackTrace();
