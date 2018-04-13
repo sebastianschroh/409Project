@@ -109,6 +109,10 @@ public class Worker implements Runnable {
 					{
 						sendObject(database.getSubmissions(assign));
 					}
+					if(s.contains("addAssign"))
+					{
+						database.uploadAssign(assign);
+					}
 				}
 
 				if(input instanceof Email){

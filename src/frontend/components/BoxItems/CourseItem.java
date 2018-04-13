@@ -143,6 +143,11 @@ public class CourseItem extends BoxItem{
 		return addStudents;
 	}
 	
+	public JButton getAddAssignment()
+	{
+		return addAssignment;
+	}
+	
 	public ArrayList<Student> getStudentList()
 	{
 		return students;

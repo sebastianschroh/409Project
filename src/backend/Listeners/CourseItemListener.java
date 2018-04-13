@@ -41,6 +41,10 @@ public class CourseItemListener implements ActionListener{
 		{
 			addStudents();
 		}
+		if(e.getSource() == c.getAddAssignment())
+		{
+			addAssignment();
+		}
 	}
 
 	
@@ -109,6 +113,12 @@ public class CourseItemListener implements ActionListener{
 		
 		p.getHoldPanel().revalidate();
 		p.getHoldPanel().repaint();
+	}
+	
+	public void addAssignment()
+	{
+		AssignmentCreator assigncreator = new AssignmentCreator(c,p);
+		assigncreator.getButton().addActionListener(new CreateAssignmentListener(assigncreator, this.p, this.c));
 	}
 
 }
