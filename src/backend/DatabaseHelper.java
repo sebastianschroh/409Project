@@ -321,13 +321,13 @@ public class DatabaseHelper {
 		
 		try{
 			prepareStatement("SELECT * FROM termproject.user WHERE type = ?");
-			getStatement().setString(1,  "C");
+			getStatement().setString(1,  "S");
 			
 			ResultSet rs = getStatement().executeQuery();
 			getConnection().commit();
 			
 			while(rs.next()){
-				list.add((Student) searchUserID(rs.getInt(2)));
+				list.add((Student) searchUserID(rs.getInt(1)));
 			}
 		}
 		catch(SQLException e){

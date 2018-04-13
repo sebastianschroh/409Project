@@ -92,8 +92,7 @@ public class CourseItemListener implements ActionListener{
 	}
 	
 	public void emailStudents(){
-		StudentEmailCreator emailWindow = new StudentEmailCreator();
-		CreateEmailListener listener = new CreateEmailListener(p, c, emailWindow);
+		StudentEmailCreator emailWindow = new StudentEmailCreator(this.p, this.c);
 	}
 	
 	public void addStudents()
