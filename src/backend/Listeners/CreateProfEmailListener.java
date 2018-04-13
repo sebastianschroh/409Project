@@ -28,7 +28,9 @@ public class CreateProfEmailListener implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		String subject = e.getSubject();
 		String message = e.getMessage();
-		ArrayList<String> list = c.getEmails();
+		String profEmail = c.getProfEmail();
+		ArrayList<String> list = new ArrayList<String>();
+		list.add(profEmail);
 		Email email = new Email(null, list, subject, message);
 		p.sendObject(email);
 		p.sendObject("emailprof");

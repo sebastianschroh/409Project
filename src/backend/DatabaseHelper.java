@@ -76,6 +76,7 @@ public class DatabaseHelper {
 				
 				ResultSet rs2 = getStatement().executeQuery();
 				getConnection().commit();
+				if(rs2.next())
 				retval = rs2.getString(3);
 			}
 		}

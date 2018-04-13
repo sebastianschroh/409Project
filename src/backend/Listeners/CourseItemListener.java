@@ -41,6 +41,9 @@ public class CourseItemListener implements ActionListener{
 		{
 			addStudents();
 		}
+		if(e.getSource() == c.getEmailProf()){
+			emailProf();
+		}
 	}
 
 	
@@ -95,7 +98,9 @@ public class CourseItemListener implements ActionListener{
 		@SuppressWarnings("unused")
 		StudentEmailCreator emailWindow = new StudentEmailCreator(this.p, this.c);
 	}
-	
+	public void emailProf(){
+		ProfEmailCreator emailWindow = new ProfEmailCreator(this.p, this.c);
+	}
 	public void addStudents()
 	{
 		c.setUnenrolledStudents();

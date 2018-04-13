@@ -19,7 +19,7 @@ public class CourseItem extends BoxItem{
 	
 	private ArrayList<Student> students;
 	private ArrayList<String> emails;
-	
+	private String profEmail;
 	private ArrayList<Assignment> assignments;
 	private PageNavigatorTest p;
 	
@@ -41,6 +41,7 @@ public class CourseItem extends BoxItem{
 		p.sendObject("getEmails");
 		
 		emails = (ArrayList<String>) p.readObject();
+		
 		listener = new CourseItemListener(this, p);
 		viewAssignments= new JButton("View Assignments");
 		viewAssignments.addActionListener(listener);
@@ -96,6 +97,10 @@ public class CourseItem extends BoxItem{
 			emailProf.setForeground(Color.white);
 			emailProf.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 			add(emailProf);
+			p.sendObject(course);
+			p.sendObject("getProfEmail");
+			
+			profEmail = (String)p.readObject();
 		}
 		
 	}
@@ -169,6 +174,12 @@ public class CourseItem extends BoxItem{
 	
 	public ArrayList<String> getEmails(){
 		return emails;
+	}
+	public String getProfEmail(){
+		return profEmail;
+	}
+	public JButton getEmailProf(){
+		return emailProf;
 	}
 
 }
