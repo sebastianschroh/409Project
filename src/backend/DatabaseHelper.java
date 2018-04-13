@@ -381,4 +381,28 @@ public class DatabaseHelper {
 		}
 		return list;
 	}
+	
+	public ArrayList<Course> getCourses(Student s){
+		ArrayList<Course> list = new ArrayList<Course>();
+		try{
+			prepareStatement("SELECT * FROM termproject.studentenrollment WHERE student_id = ?");
+			getStatement().setInt(1, s.getId());
+			ResultSet rs = getStatement().executeQuery();
+			getConnection().commit();
+			
+			while(rs.next()){
+				prepareStatement("SELECT * FROM termproject.course WHERE id = ?");
+				getStatement().setInt(1,  rs.getInt(3));
+				ResultSet rs2 = getStatement().executeQuery();
+				getConnection().commit();
+				
+				if(rs2.next())
+					list.add(new Course(rs2.getInt(1), rs2.getInt(2), rs2.getString(3), rs2.getBoolean(4)));
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return list;
+	}
 }
