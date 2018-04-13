@@ -21,18 +21,16 @@ public class CourseItem extends BoxItem{
 	private ArrayList<String> emails;
 	
 	private ArrayList<Assignment> assignments;
+	private PageNavigatorTest p;
 	
 	@SuppressWarnings("unchecked")
 	public CourseItem(Course c, PageNavigatorTest p, boolean isProf) {
 		
 		super(c.getName());
-		
+		this.p = p;
 		course = c;
 
-		p.sendObject(course);
-		p.sendObject("getstudents");
-
-		students = (ArrayList<Student>) p.readObject();
+		setEnrolledStudents();
 		
 		p.sendObject(course);
 		p.sendObject("getassignments");
@@ -105,6 +103,21 @@ public class CourseItem extends BoxItem{
 	}
 	public Course getCourse() {
 		return course;
+	}
+	
+	public void setUnenrolledStudents()
+	{
+		p.sendObject(course);
+		p.sendObject("unenrolledStudents");
+		students = (ArrayList<Student>)p.readObject();
+		
+	}
+	
+	public void setEnrolledStudents()
+	{
+		p.sendObject(course);
+		p.sendObject("getstudents");
+		students = (ArrayList<Student>)p.readObject();
 	}
 	
 	public void setCourse(Course c)

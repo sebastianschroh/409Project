@@ -316,6 +316,26 @@ public class DatabaseHelper {
 		return list;
 	}
 	
+	public ArrayList<Student> getStudentsNotEnrolled(Course c){
+		ArrayList<Student> list = new ArrayList<Student>();
+		
+		try{
+			prepareStatement("SELECT * FROM termproject.studentenrollment WHERE NOT course_id = ?");
+			getStatement().setInt(1,  c.getID());
+			
+			ResultSet rs = getStatement().executeQuery();
+			getConnection().commit();
+			
+			while(rs.next()){
+				list.add((Student) searchUserID(rs.getInt(2)));
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	public ArrayList<Assignment> getAssignments(Course c){
 		ArrayList<Assignment> list = new ArrayList<Assignment>();
 		

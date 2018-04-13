@@ -27,6 +27,10 @@ public class StudentItemListener implements ActionListener{
 		{
 			unenroll();
 		}
+		if(e.getSource() == s.getEnroll())
+		{
+			enroll();
+		}
 	}
 	
 	public void unenroll()
@@ -34,16 +38,13 @@ public class StudentItemListener implements ActionListener{
 		StudentEnrollment s = new StudentEnrollment(this.s.getStudent().getId(), c.getCourse().getID());
 		p.sendObject(s);
 		p.sendObject("unenroll");
-		p.sendObject(c.getCourse());
-		p.sendObject("getstudents");
-		c.setStudentList((ArrayList<Student>) p.readObject());
 	}
 	
 	public void enroll()
 	{
-		p.sendObject(c.getCourse());
-		p.sendObject("getstudents");
-		c.setStudentList((ArrayList<Student>) p.readObject());
+		StudentEnrollment s = new StudentEnrollment(this.s.getStudent().getId(), c.getCourse().getID());
+		p.sendObject(s);
+		p.sendObject("enroll");
 	}
 
 }
