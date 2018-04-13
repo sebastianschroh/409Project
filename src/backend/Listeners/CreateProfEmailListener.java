@@ -6,18 +6,19 @@ import java.util.ArrayList;
 
 import backend.EmailHelper;
 import frontend.components.PageNavigatorTest;
+import frontend.components.ProfEmailCreator;
 import frontend.components.StudentEmailCreator;
 import frontend.components.BoxItems.CourseItem;
 import shareddata.Course;
 import shareddata.Email;
 import shareddata.Student;
 
-public class CreateEmailListener implements ActionListener {
+public class CreateProfEmailListener implements ActionListener {
 	
 	private CourseItem c;
-	private StudentEmailCreator e;
+	private ProfEmailCreator e;
 	private PageNavigatorTest p;
-	public CreateEmailListener(PageNavigatorTest p, CourseItem c, StudentEmailCreator e)
+	public CreateProfEmailListener(PageNavigatorTest p, CourseItem c, ProfEmailCreator e)
 	{
 		this.c = c;
 		this.e = e;
@@ -30,7 +31,7 @@ public class CreateEmailListener implements ActionListener {
 		ArrayList<String> list = c.getEmails();
 		Email email = new Email(null, list, subject, message);
 		p.sendObject(email);
-		p.sendObject("emailstudents");
+		p.sendObject("emailprof");
 		
 		e.getFrame().dispose();
 	}
