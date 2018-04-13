@@ -21,7 +21,7 @@ public class SubmissionItem extends BoxItem{
 		
 		super(s.getTitle());
 		submission = s;
-		listener = new SubmissionItemListener();
+		listener = new SubmissionItemListener(this,a,p);
 		grade = new JButton("Grade Submission");
 		grade.setBackground(Color.black);
 		grade.setForeground(Color.white);
@@ -47,5 +47,10 @@ public class SubmissionItem extends BoxItem{
 	
 	public void setSubmission(Submission s){
 		submission = s;
+	}
+	
+	public JButton getGradeButton()
+	{
+		return grade;
 	}
 }
