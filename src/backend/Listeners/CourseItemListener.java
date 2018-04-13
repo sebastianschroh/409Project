@@ -83,16 +83,18 @@ public class CourseItemListener implements ActionListener{
 	
 	public void viewAssignments()
 	{
-		p.setHoldPanel(p.getHoldPanel());
-		p.getHoldPanel().removeAll();
-		for(int i = 0; i < c.getAssignmentList().size(); i++)
-		{
-			AssignmentItem temp = new AssignmentItem(c.getAssignmentList().get(i),this.p, this.c);
-			p.getHoldPanel().add(temp);
-		}
 		
-		p.getHoldPanel().revalidate();
-		p.getHoldPanel().repaint();
+			p.setHoldPanel(p.getHoldPanel());
+			p.getHoldPanel().removeAll();
+			for(int i = 0; i < c.getAssignmentList().size(); i++)
+			{
+				AssignmentItem temp = new AssignmentItem(c.getAssignmentList().get(i),this.p, this.c);
+				p.getHoldPanel().add(temp);
+			}
+		
+			p.getHoldPanel().revalidate();
+			p.getHoldPanel().repaint();
+		
 	}
 	
 	public void emailStudents(){
