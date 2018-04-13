@@ -24,7 +24,7 @@ public class DatabaseHelper {
 
 	
 	public DatabaseHelper() throws SQLException{
-		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/termproject?autoReconnect=true&useSSL=false", "root", "passwordlmao");
+		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/termproject?autoReconnect=true&useSSL=false", "root", "password");
 		connection.setAutoCommit(false);
 	}
 	
@@ -61,6 +61,29 @@ public class DatabaseHelper {
 		return user;
 	}
 	
+	public String getProfEmail(Course c){
+		String retval = null;
+		try{
+			prepareStatement("SELECT * FROM termproject.course WHERE id = ?");
+			getStatement().setInt(1,  c.getID());
+			
+			ResultSet rs = getStatement().executeQuery();
+			getConnection().commit();
+			
+			if(rs.next()){
+				prepareStatement("SELECT * FROM termproject.user WHERE id = ?");
+				getStatement().setInt(1,  rs.getInt(2));
+				
+				ResultSet rs2 = getStatement().executeQuery();
+				getConnection().commit();
+				retval = rs2.getString(3);
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return retval;
+	}
 	public Student searchStudentsID(Student s){
 		
 		try {
@@ -349,6 +372,27 @@ public class DatabaseHelper {
 			getConnection().commit();
 			
 			while(rs.next()){
+				list.add(new Assignment(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getBoolean(5), rs.getString(6)));
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<Assignment> getActiveAssignments(Course c){
+		ArrayList<Assignment> list = new ArrayList<Assignment>();
+		
+		try{
+			prepareStatement("SELECT * FROM termproject.assignment WHERE course_id = ?");
+			getStatement().setInt(1,  c.getID());
+			
+			ResultSet rs = getStatement().executeQuery();
+			getConnection().commit();
+			
+			while(rs.next()){
+				if(rs.getBoolean(5) == true)
 				list.add(new Assignment(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getBoolean(5), rs.getString(6)));
 			}
 		}

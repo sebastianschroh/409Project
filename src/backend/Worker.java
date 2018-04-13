@@ -50,6 +50,9 @@ public class Worker implements Runnable {
 					{
 						sendObject(database.getStudentEmails(course));
 					}
+					else if(s.contains("getProfEmail")){
+						sendObject(database.getProfEmail(course));
+					}
 					else if(s.contains("getstudents"))
 					{
 						sendObject(database.getStudentsEnrolled(course));
@@ -123,6 +126,9 @@ public class Worker implements Runnable {
 						for(int i = 0; i < email.getRecipients().size(); i ++){
 							new EmailHelper(email.getRecipients().get(i), email.getSubject(), email.getContent());
 						}
+					}
+					if(s.contains("emailprof")){
+						new EmailHelper(email.getRecipients().get(0), email.getSubject(), email.getContent());
 					}
 				}
 				
