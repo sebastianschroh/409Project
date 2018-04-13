@@ -321,7 +321,7 @@ public class DatabaseHelper {
 		
 		try{
 			prepareStatement("SELECT * FROM termproject.user WHERE type = ?");
-			getStatement().setString(1,  "C");
+			getStatement().setString(1,  "S");
 			
 			ResultSet rs = getStatement().executeQuery();
 			getConnection().commit();

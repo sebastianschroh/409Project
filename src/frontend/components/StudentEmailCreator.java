@@ -65,10 +65,6 @@ public class StudentEmailCreator {
 		panel.add(messageArea);
 		
 		sendButton= new JButton("Send");
-		sendButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		sendButton.setBounds(195, 238, 89, 23);
 		panel.add(sendButton);
 	}
@@ -82,12 +78,9 @@ public class StudentEmailCreator {
 	public JFrame getFrame(){
 		return frame;
 	}
-<<<<<<< HEAD
 	
 	public JButton getButton(){
 		return sendButton;
 	}
-=======
 
->>>>>>> be37504244f898cffee83de953f2fe97d2c7433b
 }
