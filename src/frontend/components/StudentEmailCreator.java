@@ -22,6 +22,7 @@ public class StudentEmailCreator {
 	private JFrame frame;
 	private JTextArea subjectArea;
 	private JTextArea messageArea;
+	private JButton sendButton;
 	/**
 	 * Launch the application.
 	 */
@@ -74,13 +75,13 @@ public class StudentEmailCreator {
 		messageArea.setBounds(60, 55, 364, 176);
 		panel.add(messageArea);
 		
-		JButton btnNewButton = new JButton("Send");
-		btnNewButton.addActionListener(new ActionListener() {
+		sendButton= new JButton("Send");
+		sendButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(195, 238, 89, 23);
-		panel.add(btnNewButton);
+		sendButton.setBounds(195, 238, 89, 23);
+		panel.add(sendButton);
 	}
 	
 	public String getSubject(){
@@ -91,5 +92,9 @@ public class StudentEmailCreator {
 	}
 	public JFrame getFrame(){
 		return frame;
+	}
+	
+	public JButton getButton(){
+		return sendButton;
 	}
 }

@@ -316,6 +316,25 @@ public class DatabaseHelper {
 		return list;
 	}
 	
+	public ArrayList<Student> getStudentsNotEnrolled(Course c){
+		ArrayList<Student> list = new ArrayList<Student>();
+		
+		try{
+			prepareStatement("SELECT * FROM termproject.user WHERE type = ?");
+			getStatement().setString(1,  "C");
+			
+			ResultSet rs = getStatement().executeQuery();
+			getConnection().commit();
+			
+			while(rs.next()){
+				list.add((Student) searchUserID(rs.getInt(2)));
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return list;
+	}
 	public ArrayList<Assignment> getAssignments(Course c){
 		ArrayList<Assignment> list = new ArrayList<Assignment>();
 		
