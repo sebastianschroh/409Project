@@ -2,24 +2,35 @@ package frontend.components.BoxItems;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 
 import backend.Listeners.AssignmentItemListener;
 import frontend.components.PageNavigatorTest;
-import shareddata.Assignment;
+import shareddata.*;
 
+@SuppressWarnings("serial")
 public class AssignmentItem extends BoxItem{
+	
 	private JButton viewSubmissions, setActive, submit, viewGrade;
 	private AssignmentItemListener listener;
 	private Assignment assignment;
 	
+	private ArrayList<Submission> submissions;
+	
+	@SuppressWarnings("unchecked")
 	public AssignmentItem(Assignment a, PageNavigatorTest p, CourseItem c){
 		super(a.getTitle());
 		listener = new AssignmentItemListener(this,c,p);
 		assignment = a;
+		
+		p.sendObject(a);
+		p.sendObject("getsubmissions");
+		
+		submissions = (ArrayList<Submission>) p.readObject();
+		
 		if(p.isProf()){
-			
 		viewSubmissions = new JButton("View Submissions");
 		viewSubmissions.addActionListener(listener);
 		viewSubmissions.setBackground(Color.black);
@@ -67,6 +78,16 @@ public class AssignmentItem extends BoxItem{
 	public JButton getSetActive()
 	{
 		return setActive;
+	}
+	
+	public JButton getViewSubmissions()
+	{
+		return viewSubmissions;
+	}
+	
+	public ArrayList<Submission> getSubmissions()
+	{
+		return submissions;
 	}
 }
 

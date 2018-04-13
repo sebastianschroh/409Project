@@ -11,6 +11,7 @@ public class AssignmentItemListener implements ActionListener{
 	
 	private PageNavigatorTest p;
 	
+	@SuppressWarnings("unused")
 	private CourseItem c;
 	
 	private AssignmentItem a;
@@ -28,6 +29,10 @@ public class AssignmentItemListener implements ActionListener{
 		{
 			setActivity();
 		}
+		if(e.getSource() == a.getViewSubmissions())
+		{
+			viewSubmissions();
+		}
 	}
 	
 	public void setActivity()
@@ -41,13 +46,23 @@ public class AssignmentItemListener implements ActionListener{
 		{
 			a.getSetActive().setForeground(Color.white);
 		}
-		else if(assign.getStatus() == false)
+		else
 		{
 			a.getSetActive().setForeground(Color.red);
 		}
-		else
+	}
+	
+	public void viewSubmissions()
+	{
+		p.setHoldPanel(p.getHoldPanel());
+		p.getHoldPanel().removeAll();
+		for(int i = 0; i < c.getStudentList().size(); i++)
 		{
-			System.out.println("lol");
+			SubmissionItem temp = new SubmissionItem(a.getSubmissions().get(i),this.p,this.a);
+			p.getHoldPanel().add(temp);
 		}
+		
+		p.getHoldPanel().revalidate();
+		p.getHoldPanel().repaint();
 	}
 }
