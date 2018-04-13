@@ -109,10 +109,15 @@ public class Worker implements Runnable {
 
 				if(input instanceof Email){
 					Email email = (Email) input;
-					for(int i = 0; i < email.getRecipients().size(); i ++){
-						new EmailHelper(email.getRecipients().get(i), email.getSubject(), email.getContent());
+					String s = (String) in.readObject();
+					if(s.contains("sendEmail")
+					{
+						for(int i = 0; i < email.getRecipients().size(); i ++){
+							new EmailHelper(email.getRecipients().get(i), email.getSubject(), email.getContent());
+						}
 					}
 				}
+				
 				if(input instanceof StudentEnrollment)
 				{
 					StudentEnrollment studen = (StudentEnrollment) input;
