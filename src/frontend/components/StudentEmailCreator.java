@@ -1,23 +1,12 @@
 package frontend.components;
 
-import java.awt.EventQueue;
+import java.awt.*;
+import java.awt.event.*;
 
-import javax.swing.JFrame;
-import java.awt.BorderLayout;
-import javax.swing.JTextPane;
-import javax.swing.BoxLayout;
-import java.awt.FlowLayout;
-import java.awt.TextArea;
-
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.*;
 
 public class StudentEmailCreator {
+
 
 	private JFrame frame;
 	private JTextArea subjectArea;
@@ -93,8 +82,12 @@ public class StudentEmailCreator {
 	public JFrame getFrame(){
 		return frame;
 	}
+<<<<<<< HEAD
 	
 	public JButton getButton(){
 		return sendButton;
 	}
+=======
+
+>>>>>>> be37504244f898cffee83de953f2fe97d2c7433b
 }
