@@ -440,7 +440,7 @@ public class DatabaseHelper {
 	public ArrayList<Submission> getSubmissions(Assignment a){
 		ArrayList<Submission> list = new ArrayList<Submission>();
 		try{
-			prepareStatement("SELECT * FROM termproject.submision WHERE assign_id = ?");
+			prepareStatement("SELECT * FROM termproject.submission WHERE assign_id = ?");
 			getStatement().setInt(1, a.getID());
 			
 			ResultSet rs = getStatement().executeQuery();

@@ -56,7 +56,7 @@ public class AssignmentItemListener implements ActionListener{
 	{
 		p.setHoldPanel(p.getHoldPanel());
 		p.getHoldPanel().removeAll();
-		for(int i = 0; i < c.getStudentList().size(); i++)
+		for(int i = 0; i < a.getSubmissions().size(); i++)
 		{
 			SubmissionItem temp = new SubmissionItem(a.getSubmissions().get(i),this.p,this.a);
 			p.getHoldPanel().add(temp);

@@ -20,7 +20,7 @@ public class Submission implements Serializable{
 		this.assign_id = assign_id;
 		this.student_id = student_id;
 		this.path = path;
-		grade = 0;
+		grade = -1;
 		comment = new String();
 		this.title = title;
 		this.timestamp = timestamp;
