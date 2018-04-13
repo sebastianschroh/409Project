@@ -93,7 +93,7 @@ public class Worker implements Runnable {
 					String s = (String) in.readObject();
 					if(s.contains(("getcourses")))
 					{
-						sendObject(database.browseCourses(student.getId()));
+						sendObject(database.getCourses(student));
 					}
 				}
 
@@ -105,6 +105,10 @@ public class Worker implements Runnable {
 					{
 						sendObject(database.setActive(assign));
 					}
+					if(s.contains("getsubmissions"))
+					{
+						//sendObject(database.getSubmissions(assign));
+					}
 				}
 
 				if(input instanceof Email){
@@ -114,6 +118,7 @@ public class Worker implements Runnable {
 					{
 						for(int i = 0; i < email.getRecipients().size(); i ++){
 							new EmailHelper(email.getRecipients().get(i), email.getSubject(), email.getContent());
+						}
 					}
 				}
 				
@@ -135,8 +140,7 @@ public class Worker implements Runnable {
 				
 				e.printStackTrace();
 			} catch (IOException e) {
-				System.out.println(e.getLocalizedMessage());
-				e.printStackTrace();
+				System.out.println("User Disconnected");
 				closeConnection();
 				break;
 			} catch (SQLException e) {

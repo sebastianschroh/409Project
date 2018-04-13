@@ -7,7 +7,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.9-rc-bin.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Zach/Downloads/glassfish5/glassfish/lib/javaee.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Zach/Downloads/glassfish5/glassfish/modules/javax.mail.jar"/>
+	<classpathentry kind="lib" path="C:/School/softeng_yr2/ENSF409/TermProject/409Project/lib/javaee.jar"/>
+	<classpathentry kind="lib" path="C:/School/softeng_yr2/ENSF409/TermProject/409Project/lib/javax.mail.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

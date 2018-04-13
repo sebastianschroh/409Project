@@ -3,13 +3,14 @@ package frontend.components.BoxItems;
 import javax.swing.JButton;
 
 import backend.Listeners.SubmissionItemListener;
+import frontend.components.PageNavigatorTest;
 import shareddata.Submission;
 
 public class SubmissionItem extends BoxItem{
 	private SubmissionItemListener listener;
 	private JButton grade;
 	private Submission submission;
-	public SubmissionItem(Submission s){
+	public SubmissionItem(Submission s, PageNavigatorTest p, AssignmentItem a){
 		
 		super(s.getTitle());
 		submission = s;

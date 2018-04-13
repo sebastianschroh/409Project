@@ -92,6 +92,7 @@ public class CourseItemListener implements ActionListener{
 	}
 	
 	public void emailStudents(){
+		@SuppressWarnings("unused")
 		StudentEmailCreator emailWindow = new StudentEmailCreator(this.p, this.c);
 	}
 	
