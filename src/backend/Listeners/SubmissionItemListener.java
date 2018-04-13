@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import frontend.components.*;
 import frontend.components.BoxItems.*;
+import shareddata.Grade;
 
 public class SubmissionItemListener implements ActionListener{
 	
@@ -28,7 +29,17 @@ public class SubmissionItemListener implements ActionListener{
 	
 	public void grade()
 	{
-		
+		String string = s.getGrade();
+		if(string.matches("[0-9]+") && string.length() > 0 && string.length() < 4)
+		{
+			
+			Grade grade = new Grade(0,a.getAssignment().getID(),s.getSubmission().getStudentID(),a.getAssignment().getCourseID(),Integer.parseInt(string));
+			s.getSubmission().setGrade(Integer.parseInt(string));
+			p.sendObject(grade);
+			p.sendObject("grade");
+			
+			s.setGrade(string);
+		}
 	}
 
 }

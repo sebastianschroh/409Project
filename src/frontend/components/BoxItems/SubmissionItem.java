@@ -16,17 +16,21 @@ public class SubmissionItem extends BoxItem{
 	private Submission submission;
 	
 	private JLabel lblGrade;
+	private JTextField txtGrade;
 	
 	public SubmissionItem(Submission s, PageNavigatorTest p, AssignmentItem a){
 		
 		super(s.getTitle());
 		submission = s;
 		listener = new SubmissionItemListener(this,a,p);
+				
 		grade = new JButton("Grade Submission");
 		grade.setBackground(Color.black);
 		grade.setForeground(Color.white);
 		grade.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 		grade.addActionListener(listener);
+		
+		txtGrade = new JTextField(3);
 		
 		
 		lblGrade = new JLabel("");
@@ -37,6 +41,7 @@ public class SubmissionItem extends BoxItem{
 		else
 			lblGrade.setForeground(Color.RED);
 		
+		add(txtGrade);
 		add(grade);
 		add(lblGrade);
 	}
@@ -52,5 +57,15 @@ public class SubmissionItem extends BoxItem{
 	public JButton getGradeButton()
 	{
 		return grade;
+	}
+	
+	public String getGrade()
+	{
+		return txtGrade.getText();
+	}
+	
+	public void setGrade(String s)
+	{
+		lblGrade.setText(s +"%");
 	}
 }
