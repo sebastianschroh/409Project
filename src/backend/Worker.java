@@ -141,6 +141,16 @@ public class Worker implements Runnable {
 						database.addEnrollment(studen);
 					}
 				}
+				
+				if(input instanceof Grade)
+				{
+					Grade grade = (Grade) input;
+					String s = (String) in.readObject();
+					if(s.contains("grade"))
+					{
+						database.addGrade(grade);
+					}
+				}
 
 			}catch (ClassNotFoundException e) {
 				

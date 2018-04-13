@@ -1,5 +1,6 @@
 package backend.Listeners;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -32,9 +33,13 @@ public class SubmissionItemListener implements ActionListener{
 		String string = s.getGrade();
 		if(string.matches("[0-9]+") && string.length() > 0 && string.length() < 4)
 		{
-			
-			Grade grade = new Grade(0,a.getAssignment().getID(),s.getSubmission().getStudentID(),a.getAssignment().getCourseID(),Integer.parseInt(string));
-			s.getSubmission().setGrade(Integer.parseInt(string));
+			int g = Integer.parseInt(string);
+			Grade grade = new Grade(0,a.getAssignment().getID(),s.getSubmission().getStudentID(),a.getAssignment().getCourseID(),g);
+			s.getSubmission().setGrade(g);
+			if(g >= 50)
+				s.getGradeLabel().setForeground(Color.GREEN);
+			else
+				s.getGradeLabel().setForeground(Color.RED);
 			p.sendObject(grade);
 			p.sendObject("grade");
 			
