@@ -436,4 +436,25 @@ public class DatabaseHelper {
 			ex.printStackTrace();
 		}
 	}
+	
+	public ArrayList<Submission> getSubmissions(Assignment a){
+		ArrayList<Submission> list = new ArrayList<Submission>();
+		try{
+			prepareStatement("SELECT * FROM termproject.submision WHERE assign_id = ?");
+			getStatement().setInt(1, a.getID());
+			
+			ResultSet rs = getStatement().executeQuery();
+			
+			while(rs.next()){
+				Submission submission = new Submission(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(8));
+				submission.setGrade(rs.getInt(6));
+				submission.setComment(rs.getString(7));
+				list.add(submission);
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return list;
+	}
 }
