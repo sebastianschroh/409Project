@@ -22,7 +22,7 @@ public class DatabaseHelper {
 
 	
 	public DatabaseHelper() throws SQLException{
-		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/termproject?autoReconnect=true&useSSL=false", "root", "passwordlmao");
+		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/termproject?autoReconnect=true&useSSL=false", "root", "password");
 		connection.setAutoCommit(false);
 	}
 	

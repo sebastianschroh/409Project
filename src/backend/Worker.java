@@ -110,7 +110,7 @@ public class Worker implements Runnable {
 				if(input instanceof Email){
 					Email email = (Email) input;
 					String s = (String) in.readObject();
-					if(s.contains("sendEmail")
+					if(s.contains("sendEmail"))
 					{
 						for(int i = 0; i < email.getRecipients().size(); i ++){
 							new EmailHelper(email.getRecipients().get(i), email.getSubject(), email.getContent());
