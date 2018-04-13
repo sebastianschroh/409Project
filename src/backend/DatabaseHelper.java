@@ -457,4 +457,29 @@ public class DatabaseHelper {
 		}
 		return list;
 	}
+	
+	public Grade addGrade(Grade g){
+		try{
+			prepareStatement("INSERT INTO termproject.grade (assign_id, student_id, course_id, assignment_grade) VALUES(?, ?, ?, ?)");
+			getStatement().setInt(1, g.getAssignID());
+			getStatement().setInt(2,  g.getStudentID());
+			getStatement().setInt(3,  g.getCourseID());
+			getStatement().setInt(4,  g.getGrade());
+			
+			getStatement().executeQuery();
+			getConnection().commit();
+			
+			prepareStatement("SELECT * FROM termproject.grade WHERE assign_id = ? AND student_id = ?");
+			getStatement().setInt(1,  g.getAssignID());
+			getStatement().setInt(2,  g.getStudentID());
+			
+			ResultSet rs = getStatement().executeQuery();
+			if(rs.next())
+				g.setID(rs.getInt(1));
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return g;
+	}
 }

@@ -5,16 +5,18 @@ import java.io.Serializable;
 public class Grade implements Serializable{
 	
 	private static final long serialVersionUID = 432;
+	private int id;
+	private int assign_id;
 	private int student_id;
+	private int course_id;
 	private int grade;
-	private String student_name;
-	private String assign_name;
 	
-	public Grade(int id, int grade, String name, String assign){
+	public Grade(int id,int assign_id, int student_id, int course_id, int grade){
 		student_id = id;
 		this.grade = grade;
-		student_name = name;
-		assign_name = assign;
+		this.assign_id = assign_id;
+		this.student_id = student_id;
+		this.course_id = course_id;
 	}
 	
 	public void setStudentID(int i){
@@ -24,15 +26,7 @@ public class Grade implements Serializable{
 	public void setGrade(int i){
 		grade = i;
 	}
-	
-	public void setStudentName(String s){
-		student_name = s;
-	}
-	
-	public void setAssignmentName(String s){
-		assign_name = s;
-	}
-	
+
 	public int getStudentID(){
 		return student_id;
 	}
@@ -41,12 +35,23 @@ public class Grade implements Serializable{
 		return grade;
 	}
 	
-	public String getStudentName(){
-		return student_name;
+	public void setID(int id){
+		this.id = id;
+	}
+	public int getID(){
+		return id;
 	}
 	
-	public String getAssignmentName(){
-		return assign_name;
+	public void setAssignID(int id){
+		assign_id = id;
 	}
-	
+	public int getAssignID(){
+		return assign_id;
+	}
+	public void setCourseID(int id){
+		course_id = id;
+	}
+	public int getCourseID(){
+		return course_id;
+	}
 }
