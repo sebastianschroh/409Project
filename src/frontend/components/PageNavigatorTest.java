@@ -141,7 +141,8 @@ public class PageNavigatorTest {
 	
 	public void addActionListener()
 	{
-		btnAddCourse.addActionListener(new AddCourseListener(this));
+		if(isProf)
+			btnAddCourse.addActionListener(new AddCourseListener(this));
 		
 		btnViewCourse.addActionListener(new ViewCourseListener(this));
 		

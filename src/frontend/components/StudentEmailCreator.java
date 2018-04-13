@@ -72,7 +72,6 @@ public class StudentEmailCreator {
 	}
 
 	public JButton getButton() {
-		// TODO Auto-generated method stub
 		return sendButton;
 	}
 

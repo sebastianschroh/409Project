@@ -98,10 +98,6 @@ public class CourseItem extends BoxItem{
 			add(emailProf);
 		}
 		
-		p.sendObject(course);
-		p.sendObject("getstudents");
-		
-		students = (ArrayList<Student>) p.readObject();
 	}
 	public Course getCourse() {
 		return course;
