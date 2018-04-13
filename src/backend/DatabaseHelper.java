@@ -320,8 +320,8 @@ public class DatabaseHelper {
 		ArrayList<Student> list = new ArrayList<Student>();
 		
 		try{
-			prepareStatement("SELECT * FROM termproject.studentenrollment WHERE NOT course_id = ?");
-			getStatement().setInt(1,  c.getID());
+			prepareStatement("SELECT * FROM termproject.user WHERE type = ?");
+			getStatement().setString(1,  "C");
 			
 			ResultSet rs = getStatement().executeQuery();
 			getConnection().commit();
@@ -335,7 +335,7 @@ public class DatabaseHelper {
 		}
 		return list;
 	}
-	
+
 	public ArrayList<Assignment> getAssignments(Course c){
 		ArrayList<Assignment> list = new ArrayList<Assignment>();
 		
