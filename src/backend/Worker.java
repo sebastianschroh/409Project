@@ -97,11 +97,18 @@ public class Worker implements Runnable {
 				if(input instanceof Student)
 				{
 					Student student = (Student) input;
-					String s = (String) in.readObject();
+					String  s = (String) in.readObject();
 					if(s.contains(("getcourses")))
 					{
 						sendObject(database.getCourses(student));
 					}
+					
+					else
+					{
+						int assign = Integer.parseInt(s);
+						sendObject(database.getGrade(student, assign));
+					}
+					
 				}
 
 				if(input instanceof Assignment)
@@ -157,6 +164,15 @@ public class Worker implements Runnable {
 					if(s.contains("grade"))
 					{
 						database.addGrade(grade);
+					}
+				}
+				if(input instanceof Submission)
+				{
+					Submission submission = (Submission) input;
+					String s = (String) in.readObject();
+					if(s.contains("submitassignment"))
+					{
+						database.addSubmission(submission);
 					}
 				}
 

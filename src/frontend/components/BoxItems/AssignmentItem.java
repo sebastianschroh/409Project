@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 import backend.Listeners.AssignmentItemListener;
 import frontend.components.PageNavigatorTest;
@@ -14,6 +15,7 @@ import shareddata.*;
 public class AssignmentItem extends BoxItem{
 	
 	private JButton viewSubmissions, setActive, submit, viewGrade;
+	private JLabel studentGrade;
 	private AssignmentItemListener listener;
 	private Assignment assignment;
 	
@@ -62,8 +64,13 @@ public class AssignmentItem extends BoxItem{
 			viewGrade.setForeground(Color.white);
 			viewGrade.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 			
+			studentGrade = new JLabel("Click to view");
+			studentGrade.setForeground(Color.white);
+			studentGrade.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+			
 			add(submit);
 			add(viewGrade);
+			add(studentGrade);
 		}
 	}
 	
@@ -88,6 +95,18 @@ public class AssignmentItem extends BoxItem{
 	public JButton getSubmit()
 	{
 		return submit;
+	}
+	public JButton getViewGrade()
+	{
+		return viewGrade;
+	}
+	public void setStudentGrade(String s)
+	{
+		studentGrade.setText(s);
+	}
+	public JLabel getStudentGrade()
+	{
+		return studentGrade;
 	}
 	public ArrayList<Submission> getSubmissions()
 	{

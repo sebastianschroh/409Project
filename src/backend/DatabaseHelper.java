@@ -537,11 +537,11 @@ public class DatabaseHelper {
 		return g;
 	}
 	
-	public Grade getGrade(Assignment a, Student s){
+	public Grade getGrade(Student s, Integer a){
 		Grade g = new Grade(0, 0, 0, 0, 0);
 		try{
 			prepareStatement("SELECT * FROM termproject.grade WHERE assign_id = ? AND student_id = ?");
-			getStatement().setInt(1, a.getID());
+			getStatement().setInt(1, a);
 			getStatement().setInt(2, s.getId());
 			
 			ResultSet rs = getStatement().executeQuery();

@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import frontend.components.*;
 import frontend.components.BoxItems.*;
 import shareddata.Assignment;
+import shareddata.Grade;
 
 public class AssignmentItemListener implements ActionListener{
 	
@@ -32,6 +33,14 @@ public class AssignmentItemListener implements ActionListener{
 		if(e.getSource() == a.getViewSubmissions())
 		{
 			viewSubmissions();
+		}
+		if(e.getSource() == a.getSubmit())
+		{
+			submit();
+		}
+		if(e.getSource() == a.getViewGrade())
+		{
+			viewGrade();
 		}
 	}
 	
@@ -64,5 +73,30 @@ public class AssignmentItemListener implements ActionListener{
 		
 		p.getHoldPanel().revalidate();
 		p.getHoldPanel().repaint();
+	}
+	
+	public void submit()
+	{
+		SubmissionCreator c = new SubmissionCreator();
+		c.getButton().addActionListener(new SubmissionListener(c,a,p));
+	}
+	
+	public void viewGrade()
+	{
+		p.sendObject(p.getUser());
+		p.sendObject(a.getAssignment().getID() +"");
+		
+		Grade g = (Grade) p.readObject();
+		
+		int grade = g.getGrade();
+		a.setStudentGrade(grade +"");
+		if(grade >= 50)
+		{
+			a.getStudentGrade().setForeground(Color.GREEN);
+		}
+		else
+		{
+			a.getStudentGrade().setForeground(Color.RED);
+		}
 	}
 }
