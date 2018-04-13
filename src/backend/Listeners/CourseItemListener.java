@@ -64,6 +64,7 @@ public class CourseItemListener implements ActionListener{
 
 	public void viewStudents()
 	{
+		c.setEnrolledStudents();
 		p.setHoldPanel(p.getHoldPanel());
 		p.getHoldPanel().removeAll();
 		for(int i = 0; i < c.getStudentList().size(); i++)
@@ -91,13 +92,22 @@ public class CourseItemListener implements ActionListener{
 	}
 	
 	public void emailStudents(){
-		StudentEmailCreator emailWindow = new StudentEmailCreator();
-		CreateEmailListener listener = new CreateEmailListener(p, c, emailWindow);
+		StudentEmailCreator emailWindow = new StudentEmailCreator(this.p, this.c);
 	}
 	
 	public void addStudents()
 	{
+		c.setUnenrolledStudents();
+		p.setHoldPanel(p.getHoldPanel());
+		p.getHoldPanel().removeAll();
+		for(int i = 0; i < c.getStudentList().size(); i++)
+		{
+			StudentItem temp = new StudentItem(c.getStudentList().get(i),this.p,this.c,'e');
+			p.getHoldPanel().add(temp);
+		}
 		
+		p.getHoldPanel().revalidate();
+		p.getHoldPanel().repaint();
 	}
 
 }

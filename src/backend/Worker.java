@@ -58,6 +58,10 @@ public class Worker implements Runnable {
 					{
 						sendObject(database.getAssignments(course));
 					}
+					else if(s.contains("unenrolledStudents"))
+					{
+						sendObject(database.getStudentsNotEnrolled(course));
+					}
 				}
 				if(input instanceof LoginInfo)
 				{

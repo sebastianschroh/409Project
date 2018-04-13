@@ -5,6 +5,9 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import backend.Listeners.*;
+import frontend.components.BoxItems.*;
+
 public class StudentEmailCreator {
 
 
@@ -12,26 +15,14 @@ public class StudentEmailCreator {
 	private JTextArea subjectArea;
 	private JTextArea messageArea;
 	private JButton sendButton;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					StudentEmailCreator window = new StudentEmailCreator();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	private PageNavigatorTest p;
+	private CourseItem c;
 	/**
 	 * Create the application.
 	 */
-	public StudentEmailCreator() {
+	public StudentEmailCreator(PageNavigatorTest p, CourseItem c) {
+		this.p = p;
+		this.c = c;
 		initialize();
 		frame.setVisible(true);
 	}
@@ -42,7 +33,7 @@ public class StudentEmailCreator {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
@@ -65,6 +56,7 @@ public class StudentEmailCreator {
 		panel.add(messageArea);
 		
 		sendButton= new JButton("Send");
+		sendButton.addActionListener(new CreateEmailListener(this.p, this.c, this));
 		sendButton.setBounds(195, 238, 89, 23);
 		panel.add(sendButton);
 	}
@@ -78,8 +70,7 @@ public class StudentEmailCreator {
 	public JFrame getFrame(){
 		return frame;
 	}
-	
-	public JButton getButton(){
+
 		return sendButton;
 	}
 

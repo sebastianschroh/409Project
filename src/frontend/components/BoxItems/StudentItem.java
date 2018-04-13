@@ -49,4 +49,9 @@ public class StudentItem extends BoxItem{
 	{
 		return unenroll;
 	}
+	
+	public JButton getEnroll()
+	{
+		return enroll;
+	}
 }

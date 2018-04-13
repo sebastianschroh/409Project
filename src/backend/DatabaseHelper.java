@@ -327,7 +327,7 @@ public class DatabaseHelper {
 			getConnection().commit();
 			
 			while(rs.next()){
-				list.add((Student) searchUserID(rs.getInt(2)));
+				list.add((Student) searchUserID(rs.getInt(1)));
 			}
 		}
 		catch(SQLException e){
@@ -335,6 +335,7 @@ public class DatabaseHelper {
 		}
 		return list;
 	}
+
 	public ArrayList<Assignment> getAssignments(Course c){
 		ArrayList<Assignment> list = new ArrayList<Assignment>();
 		
