@@ -71,7 +71,6 @@ public class StudentEmailCreator {
 		return frame;
 	}
 
-	public JButton getButton(){
 		return sendButton;
 	}
 
