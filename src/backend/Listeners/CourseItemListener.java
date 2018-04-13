@@ -41,14 +41,14 @@ public class CourseItemListener implements ActionListener{
 		{
 			addStudents();
 		}
-<<<<<<< HEAD
+
 		if(e.getSource() == c.getEmailProf()){
 			emailProf();
-=======
+		}
 		if(e.getSource() == c.getAddAssignment())
 		{
 			addAssignment();
->>>>>>> 1c6ab4d805f77566ad71fae439681048abf4cd48
+
 		}
 	}
 

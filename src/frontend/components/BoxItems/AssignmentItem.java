@@ -85,6 +85,10 @@ public class AssignmentItem extends BoxItem{
 		return viewSubmissions;
 	}
 	
+	public JButton getSubmit()
+	{
+		return submit;
+	}
 	public ArrayList<Submission> getSubmissions()
 	{
 		return submissions;
