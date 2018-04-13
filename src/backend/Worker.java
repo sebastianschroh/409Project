@@ -107,14 +107,14 @@ public class Worker implements Runnable {
 					}
 					if(s.contains("getsubmissions"))
 					{
-						//sendObject(database.getSubmissions(assign));
+						sendObject(database.getSubmissions(assign));
 					}
 				}
 
 				if(input instanceof Email){
 					Email email = (Email) input;
 					String s = (String) in.readObject();
-					if(s.contains("sendEmail"))
+					if(s.contains("emailstudents"))
 					{
 						for(int i = 0; i < email.getRecipients().size(); i ++){
 							new EmailHelper(email.getRecipients().get(i), email.getSubject(), email.getContent());
